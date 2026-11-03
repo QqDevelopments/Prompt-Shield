@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "model_revision": "24c7e5aba9ae350923357a6f0b92571be34037ec",
+  "files": [
+    {
+      "name": "fp32.onnx",
+      "url": "https://huggingface.co/Xenova/bert-base-NER/resolve/24c7e5aba9ae350923357a6f0b92571be34037ec/onnx/model.onnx",
+      "sha256": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+      "size": 431172606
+    },
+    {
+      "name": "existing.onnx",
+      "url": "https://huggingface.co/Xenova/bert-base-NER/resolve/24c7e5aba9ae350923357a6f0b92571be34037ec/onnx/model_quantized.onnx",
+      "sha256": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+      "size": 108952255
+    },
+    {
+      "name": "tokenizer.json",
+      "url": "https://huggingface.co/Xenova/bert-base-NER/resolve/24c7e5aba9ae350923357a6f0b92571be34037ec/tokenizer.json",
+      "sha256": "343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1",
+      "size": 668923
+    },
+    {
+      "name": "config.json",
+      "url": "https://huggingface.co/Xenova/bert-base-NER/resolve/24c7e5aba9ae350923357a6f0b92571be34037ec/config.json",
+      "sha256": "a73a2eccc921bbdea95a94b49a157d3694b5c2abbae7a6f3000e14404a9c31a8",
+      "size": 999
+    },
+    {
+      "name": "few-nerd-test.parquet",
+      "url": "https://huggingface.co/datasets/DFKI-SLT/few-nerd/resolve/205f3e9c9f3577ea2561d43f2f62dc249ab92d5b/supervised/test-00000-of-00001.parquet",
+      "sha256": "b7ad746fcbeb68fcc235ba7142d7c3723ea2dc39930089e947284defecf300c6",
+      "size": 4823735
+    }
+  ],
+  "dataset": {
+    "name": "DFKI-SLT/few-nerd",
+    "revision": "205f3e9c9f3577ea2561d43f2f62dc249ab92d5b",
+    "split": "supervised/test",
+    "license": "CC-BY-SA-4.0",
+    "attribution": "Ding et al., Few-NERD: A Few-Shot Named Entity Recognition Dataset, ACL 2021",
+    "sample_count": 2000,
+    "selection": "ascending SHA256 of UTF-8 example ID, then ID",
+    "coarse_labels": {"4": "LOCATION", "5": "ORGANIZATION", "7": "PERSON"},
+    "other_labels": "O for the supported three-class evaluation; boundaries follow contiguous fine labels"
+  },
+  "conversion": {
+    "weight_type": "QInt8",
+    "per_channel": false,
+    "reduce_range": false,
+    "operators": ["MatMul", "Gemm"],
+    "extra_options": {"MatMulConstBOnly": true}
+  },
+  "acceptance": {"overall_f1_drop": 0.01, "overall_recall_drop": 0.01, "class_recall_drop": 0.02}
+}

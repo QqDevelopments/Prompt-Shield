@@ -1,0 +1,8 @@
+# Optional single-origin installation with static frontend assets in the gateway.
+# Normal local development uses the base Compose backend plus npm run dev.
+services:
+  gateway:
+    build:
+      target: combined
+    environment:
+      PUBLIC_ORIGIN: ${COMBINED_PUBLIC_ORIGIN:-http://localhost:8080}

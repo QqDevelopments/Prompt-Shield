@@ -1,0 +1,735 @@
+{
+  "schema_version": 1,
+  "run_url": "https://github.com/dQqAn/prompt-shield/actions/runs/34046905126",
+  "commit": "0286837f55f4c9b9475c78605826515ab2d36fbf",
+  "verified_date": "2026-09-06",
+  "jobs_total": 8,
+  "jobs_successful": 8,
+  "environment": {
+    "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "logical_cpus": 8,
+    "host_memory": "MemTotal:        8130864 kB",
+    "versions": {
+      "go": "go version go1.27.0 linux/amd64",
+      "rust": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+      "node": "v24.12.0",
+      "docker": "29.1.3"
+    }
+  },
+  "source_artifact_sha256": {
+    "load-evidence/load/report.json": "785a4e004b04e2eee28d136d756fefe92584f4f17454dd5dcc6c3f57e23ccd2e",
+    "model-evaluation-evidence/comparison.json": "0c153c2c100e6bd1addfba01753f40d39c56b4fce1879daf73e0427dddeda125",
+    "model-evaluation-evidence/conversion.json": "0ff69d4fc44c234f76b93642bcdd504aeb57ee1cab63af56c6e314d5342cb5bc",
+    "integration-evidence/summary.json": "357774acbf8ce8ac5fbbafd4988e077944e0a2b493d8b0b9a1361cb435b54040",
+    "integration-evidence/rust-benchmarks.txt": "d6d3e754a9dc781d78c76089cc8b57b71f5bd5a85891cc4649e357f2381a8805",
+    "clean-install-evidence/result.json": "a2e6d9df7f3e81a96cb2f297e810f979971918d06d9a5bf40e00aa8f1172eca3",
+    "clean-install-evidence/resources.json": "3ee45bf608442db9cca93dbf6b5a9ae08c3875470a3193c6d796ca82f37b2bd8"
+  },
+  "model": {
+    "passed": true,
+    "failures": [],
+    "evaluated": 2000,
+    "rejected_ids": [],
+    "span_aggregation": "first_confident_entity_wordpiece_v1",
+    "scores": {
+      "fp32": {
+        "PERSON": {
+          "precision": 0.7563091482649842,
+          "recall": 0.8647430117222723,
+          "f1": 0.806899453092133,
+          "gold": 1109,
+          "matched": 959,
+          "predicted": 1268
+        },
+        "ORGANIZATION": {
+          "precision": 0.5125,
+          "recall": 0.6680244399185336,
+          "f1": 0.5800176834659593,
+          "gold": 982,
+          "matched": 656,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6604651162790698,
+          "recall": 0.744429882044561,
+          "f1": 0.6999383857054837,
+          "gold": 1526,
+          "matched": 1136,
+          "predicted": 1720
+        },
+        "overall": {
+          "precision": 0.64456419868791,
+          "recall": 0.7605750622062483,
+          "f1": 0.6977805960684844,
+          "gold": 3617,
+          "predicted": 4268,
+          "matched": 2751
+        }
+      },
+      "existing": {
+        "PERSON": {
+          "precision": 0.7509819324430479,
+          "recall": 0.8620378719567178,
+          "f1": 0.8026868178001679,
+          "gold": 1109,
+          "matched": 956,
+          "predicted": 1273
+        },
+        "ORGANIZATION": {
+          "precision": 0.51015625,
+          "recall": 0.664969450101833,
+          "f1": 0.5773651635720601,
+          "gold": 982,
+          "matched": 653,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6558328496807894,
+          "recall": 0.7404980340760158,
+          "f1": 0.6955986457371499,
+          "gold": 1526,
+          "matched": 1130,
+          "predicted": 1723
+        },
+        "overall": {
+          "precision": 0.6405519176800748,
+          "recall": 0.757257395631739,
+          "f1": 0.694032687191182,
+          "gold": 3617,
+          "predicted": 4276,
+          "matched": 2739
+        }
+      },
+      "candidate": {
+        "PERSON": {
+          "precision": 0.7555031446540881,
+          "recall": 0.866546438232642,
+          "f1": 0.8072238555228896,
+          "gold": 1109,
+          "matched": 961,
+          "predicted": 1272
+        },
+        "ORGANIZATION": {
+          "precision": 0.50546875,
+          "recall": 0.6588594704684317,
+          "f1": 0.5720601237842617,
+          "gold": 982,
+          "matched": 647,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6510687463893703,
+          "recall": 0.7385321100917431,
+          "f1": 0.6920478968375806,
+          "gold": 1526,
+          "matched": 1127,
+          "predicted": 1731
+        },
+        "overall": {
+          "precision": 0.6385710950268504,
+          "recall": 0.7561515067735692,
+          "f1": 0.6924050632911394,
+          "gold": 3617,
+          "predicted": 4283,
+          "matched": 2735
+        }
+      },
+      "candidate-repeat": {
+        "PERSON": {
+          "precision": 0.7555031446540881,
+          "recall": 0.866546438232642,
+          "f1": 0.8072238555228896,
+          "gold": 1109,
+          "matched": 961,
+          "predicted": 1272
+        },
+        "ORGANIZATION": {
+          "precision": 0.50546875,
+          "recall": 0.6588594704684317,
+          "f1": 0.5720601237842617,
+          "gold": 982,
+          "matched": 647,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6510687463893703,
+          "recall": 0.7385321100917431,
+          "f1": 0.6920478968375806,
+          "gold": 1526,
+          "matched": 1127,
+          "predicted": 1731
+        },
+        "overall": {
+          "precision": 0.6385710950268504,
+          "recall": 0.7561515067735692,
+          "f1": 0.6924050632911394,
+          "gold": 3617,
+          "predicted": 4283,
+          "matched": 2735
+        }
+      }
+    },
+    "artifacts": {
+      "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+      "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+      "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+      "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+    },
+    "corpus": {
+      "name": "DFKI-SLT/few-nerd",
+      "revision": "205f3e9c9f3577ea2561d43f2f62dc249ab92d5b",
+      "split": "supervised/test",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Ding et al., Few-NERD: A Few-Shot Named Entity Recognition Dataset, ACL 2021",
+      "sha256": "ab42cb89425c4a874323de9a49322fd1e36734c81daa4e3129ffc07d5141d3ee",
+      "sample_count": 2000
+    },
+    "reproducible_conversion": true
+  },
+  "load": {
+    "profile": "smoke",
+    "complete": true,
+    "completed_conditions": 13,
+    "planned_conditions": 13,
+    "conditions": [
+      {
+        "name": "000-grpc-clean-64-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.001688622,
+        "requests": 1770,
+        "successful_requests": 1770,
+        "outcomes": {
+          "ok": 1770
+        },
+        "successful_rps": 589.6680911628548,
+        "all_latency": {
+          "count": 1770,
+          "p50_ms": 4.805295436797302,
+          "p95_ms": 18.785188297319568,
+          "p99_ms": 30.5894584999237,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 1770,
+          "p50_ms": 4.805295436797302,
+          "p95_ms": 18.785188297319568,
+          "p99_ms": 30.5894584999237,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 243392512,
+            "last_rss_bytes": 244367360,
+            "sampled_peak_rss_bytes": 244367360,
+            "process_lifetime_peak_rss_bytes": 244367360
+          }
+        }
+      },
+      {
+        "name": "001-grpc-masked-1024-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.004088624,
+        "requests": 1694,
+        "successful_requests": 1694,
+        "outcomes": {
+          "ok": 1694
+        },
+        "successful_rps": 563.8981441713951,
+        "all_latency": {
+          "count": 1694,
+          "p50_ms": 5.100979455901974,
+          "p95_ms": 19.547982874805832,
+          "p99_ms": 26.08719342937485,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 1694,
+          "p50_ms": 5.100979455901974,
+          "p95_ms": 19.547982874805832,
+          "p99_ms": 26.08719342937485,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 244367360,
+            "last_rss_bytes": 244572160,
+            "sampled_peak_rss_bytes": 244572160,
+            "process_lifetime_peak_rss_bytes": 244572160
+          }
+        }
+      },
+      {
+        "name": "002-grpc-blocked-16384-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.01051469,
+        "requests": 1668,
+        "successful_requests": 1668,
+        "outcomes": {
+          "expected_block": 1668
+        },
+        "successful_rps": 554.0580836694074,
+        "all_latency": {
+          "count": 1668,
+          "p50_ms": 5.203529242965602,
+          "p95_ms": 20.34174997094426,
+          "p99_ms": 30.895363084922906,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 1668,
+          "p50_ms": 5.203529242965602,
+          "p95_ms": 20.34174997094426,
+          "p99_ms": 30.895363084922906,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 244572160,
+            "last_rss_bytes": 245235712,
+            "sampled_peak_rss_bytes": 245235712,
+            "process_lifetime_peak_rss_bytes": 245235712
+          }
+        }
+      },
+      {
+        "name": "003-grpc-ner-32-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.082820654,
+        "requests": 138,
+        "successful_requests": 138,
+        "outcomes": {
+          "ok": 138
+        },
+        "successful_rps": 44.76419989626812,
+        "all_latency": {
+          "count": 138,
+          "p50_ms": 86.96114301438574,
+          "p95_ms": 111.5220345569126,
+          "p99_ms": 141.60366108633403,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 138,
+          "p50_ms": 86.96114301438574,
+          "p95_ms": 111.5220345569126,
+          "p99_ms": 141.60366108633403,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 245243904,
+            "last_rss_bytes": 247808000,
+            "sampled_peak_rss_bytes": 247808000,
+            "process_lifetime_peak_rss_bytes": 247808000
+          }
+        }
+      },
+      {
+        "name": "004-grpc-ner-512-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 4.051329077,
+        "requests": 14,
+        "successful_requests": 14,
+        "outcomes": {
+          "ok": 14
+        },
+        "successful_rps": 3.4556560906098914,
+        "all_latency": {
+          "count": 14,
+          "p50_ms": 1121.8193029452375,
+          "p95_ms": 1214.7696375539726,
+          "p99_ms": 1214.7696375539726,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 14,
+          "p50_ms": 1121.8193029452375,
+          "p95_ms": 1214.7696375539726,
+          "p99_ms": 1214.7696375539726,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 247812096,
+            "last_rss_bytes": 296812544,
+            "sampled_peak_rss_bytes": 296812544,
+            "process_lifetime_peak_rss_bytes": 296812544
+          }
+        }
+      },
+      {
+        "name": "005-grpc-mixed-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.065173818,
+        "requests": 638,
+        "successful_requests": 638,
+        "outcomes": {
+          "expected_block": 63,
+          "ok": 575
+        },
+        "successful_rps": 208.14480283414716,
+        "all_latency": {
+          "count": 638,
+          "p50_ms": 1.7583478344061816,
+          "p95_ms": 97.01991031933258,
+          "p99_ms": 118.38294843833445,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 638,
+          "p50_ms": 1.7583478344061816,
+          "p95_ms": 97.01991031933258,
+          "p99_ms": 118.38294843833445,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 296812544,
+            "last_rss_bytes": 296816640,
+            "sampled_peak_rss_bytes": 296816640,
+            "process_lifetime_peak_rss_bytes": 296816640
+          }
+        }
+      },
+      {
+        "name": "006-http-mixed-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.085518924,
+        "requests": 189,
+        "successful_requests": 142,
+        "outcomes": {
+          "expected_block": 13,
+          "http_429": 47,
+          "ok": 129
+        },
+        "successful_rps": 46.021432212094254,
+        "all_latency": {
+          "count": 189,
+          "p50_ms": 52.35183092168257,
+          "p95_ms": 161.1583132603901,
+          "p99_ms": 254.70466366022796,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 142,
+          "p50_ms": 78.72469362306897,
+          "p95_ms": 162.76990639299407,
+          "p99_ms": 254.70466366022796,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 1000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 296816640,
+            "last_rss_bytes": 296833024,
+            "sampled_peak_rss_bytes": 296833024,
+            "process_lifetime_peak_rss_bytes": 296833024
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22827008,
+            "last_rss_bytes": 27713536,
+            "sampled_peak_rss_bytes": 27713536,
+            "process_lifetime_peak_rss_bytes": 27713536
+          }
+        }
+      },
+      {
+        "name": "007-sse-mixed-c4-cancel0",
+        "concurrency": 4,
+        "duration_seconds": 3.06577295,
+        "requests": 170,
+        "successful_requests": 138,
+        "outcomes": {
+          "expected_block": 13,
+          "http_429": 32,
+          "ok": 125
+        },
+        "successful_rps": 45.01311814366423,
+        "all_latency": {
+          "count": 170,
+          "p50_ms": 56.12832081401697,
+          "p95_ms": 176.2565674688142,
+          "p99_ms": 333.2072105070134,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 138,
+          "p50_ms": 67.13794540369338,
+          "p95_ms": 181.59734802068678,
+          "p99_ms": 333.2072105070134,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 1000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 296853504,
+            "last_rss_bytes": 296853504,
+            "sampled_peak_rss_bytes": 296853504,
+            "process_lifetime_peak_rss_bytes": 296853504
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22462464,
+            "last_rss_bytes": 27095040,
+            "sampled_peak_rss_bytes": 27095040,
+            "process_lifetime_peak_rss_bytes": 27095040
+          }
+        }
+      },
+      {
+        "name": "008-grpc-ner-128-c4-cancel10",
+        "concurrency": 4,
+        "duration_seconds": 3.256403698,
+        "requests": 1509,
+        "successful_requests": 37,
+        "outcomes": {
+          "canceled": 16,
+          "grpc_ResourceExhausted": 1456,
+          "ok": 37
+        },
+        "successful_rps": 11.36222760793585,
+        "all_latency": {
+          "count": 1509,
+          "p50_ms": 0.6691599250267775,
+          "p95_ms": 3.784275484412754,
+          "p99_ms": 317.03517912626984,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 37,
+          "p50_ms": 310.78831391654677,
+          "p95_ms": 410.6421130864386,
+          "p99_ms": 414.7485442173026,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 296853504,
+            "last_rss_bytes": 297263104,
+            "sampled_peak_rss_bytes": 297263104,
+            "process_lifetime_peak_rss_bytes": 297263104
+          }
+        }
+      },
+      {
+        "name": "009-http-mixed-c4-cancel10",
+        "concurrency": 4,
+        "duration_seconds": 3.020179473,
+        "requests": 166,
+        "successful_requests": 123,
+        "outcomes": {
+          "canceled": 14,
+          "expected_block": 12,
+          "http_429": 29,
+          "ok": 111
+        },
+        "successful_rps": 40.726056547169975,
+        "all_latency": {
+          "count": 166,
+          "p50_ms": 54.47756579195494,
+          "p95_ms": 194.69700879721023,
+          "p99_ms": 287.0077171287195,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 123,
+          "p50_ms": 84.40359925243759,
+          "p95_ms": 198.6104387740341,
+          "p99_ms": 287.0077171287195,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 1000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 297263104,
+            "last_rss_bytes": 297263104,
+            "sampled_peak_rss_bytes": 297263104,
+            "process_lifetime_peak_rss_bytes": 297263104
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22548480,
+            "last_rss_bytes": 27750400,
+            "sampled_peak_rss_bytes": 27750400,
+            "process_lifetime_peak_rss_bytes": 27750400
+          }
+        }
+      },
+      {
+        "name": "010-sse-mixed-c4-cancel10",
+        "concurrency": 4,
+        "duration_seconds": 3.105057011,
+        "requests": 229,
+        "successful_requests": 135,
+        "outcomes": {
+          "canceled": 15,
+          "expected_block": 12,
+          "http_429": 79,
+          "ok": 123
+        },
+        "successful_rps": 43.47746257854458,
+        "all_latency": {
+          "count": 229,
+          "p50_ms": 40.41789648922499,
+          "p95_ms": 154.86993237358388,
+          "p99_ms": 232.88653174400307,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 135,
+          "p50_ms": 82.74049519893897,
+          "p95_ms": 171.0728584829231,
+          "p99_ms": 247.21380776998944,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 1000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 297263104,
+            "last_rss_bytes": 297263104,
+            "sampled_peak_rss_bytes": 297263104,
+            "process_lifetime_peak_rss_bytes": 297263104
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22974464,
+            "last_rss_bytes": 27631616,
+            "sampled_peak_rss_bytes": 27631616,
+            "process_lifetime_peak_rss_bytes": 27631616
+          }
+        }
+      },
+      {
+        "name": "011-grpc-rules-over-limit-c1-cancel0",
+        "concurrency": 1,
+        "duration_seconds": 1.001584538,
+        "requests": 523,
+        "successful_requests": 523,
+        "outcomes": {
+          "expected_rejection": 523
+        },
+        "successful_rps": 522.172597676423,
+        "all_latency": {
+          "count": 523,
+          "p50_ms": 1.2913767115891996,
+          "p95_ms": 3.8221282392568843,
+          "p99_ms": 14.794365566372802,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 523,
+          "p50_ms": 1.2913767115891996,
+          "p95_ms": 3.8221282392568843,
+          "p99_ms": 14.794365566372802,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 297263104,
+            "last_rss_bytes": 297951232,
+            "sampled_peak_rss_bytes": 297951232,
+            "process_lifetime_peak_rss_bytes": 297951232
+          }
+        }
+      },
+      {
+        "name": "012-grpc-ner-513-c1-cancel0",
+        "concurrency": 1,
+        "duration_seconds": 1.002217951,
+        "requests": 429,
+        "successful_requests": 429,
+        "outcomes": {
+          "expected_rejection": 429
+        },
+        "successful_rps": 428.05060473318144,
+        "all_latency": {
+          "count": 429,
+          "p50_ms": 1.8116578331365238,
+          "p95_ms": 3.6005597415577504,
+          "p99_ms": 12.870420164094002,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 429,
+          "p50_ms": 1.8116578331365238,
+          "p95_ms": 3.6005597415577504,
+          "p99_ms": 12.870420164094002,
+          "relative_bucket_width": 0.01
+        },
+        "recovered": true,
+        "deadline_ms": 10000,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 297951232,
+            "last_rss_bytes": 298897408,
+            "sampled_peak_rss_bytes": 298897408,
+            "process_lifetime_peak_rss_bytes": 298897408
+          }
+        }
+      }
+    ],
+    "cancellation": {
+      "iterations": 20,
+      "recovered_rounds": 20,
+      "max_drain_ms": 1357.452557
+    }
+  },
+  "integration": {
+    "schema_version": 1,
+    "exit_code": 0,
+    "required": [
+      "TestPinnedSDKCompatibility",
+      "TestPostgresBoundary",
+      "TestRealEngineHTTPBoundary",
+      "TestRedisAtomicLimit"
+    ],
+    "missing_or_failed": [],
+    "skipped": []
+  },
+  "clean_install": {
+    "schema_version": 1,
+    "passed": true,
+    "source_files": 130,
+    "source_mode": "tracked-source",
+    "preexisting_app_dependencies": false,
+    "ner": "passed"
+  },
+  "installation_memory": {
+    "engine": {
+      "container_id": "ce1bd0551bd288022e3774aba1da2e9fa4838980d8c357d19fc2e911cee0d1cc",
+      "cgroup_memory_current_bytes": 220127232,
+      "cgroup_memory_peak_bytes": 221003776,
+      "scope": "installation and functional smoke; not sustained load"
+    },
+    "gateway": {
+      "container_id": "ad85f212160700ffb69ca5dcd354a0cc776e88573c23feab291a74832f671e47",
+      "cgroup_memory_current_bytes": 4038656,
+      "cgroup_memory_peak_bytes": 7049216,
+      "scope": "installation and functional smoke; not sustained load"
+    }
+  },
+  "limitations": [
+    "Smoke load only; full sustained matrix and soak not executed in this run.",
+    "Absolute latency and throughput targets are reported, not enforced by this workflow.",
+    "HTTP 429 and gRPC resource exhaustion are capacity failures even when evidence validation passes.",
+    "Disjoint model confirmation and before/after coverage replay are separate local evidence.",
+    "Artifact checksums identify the downloaded source reports; this compact summary omits per-request predictions and corpus IDs."
+  ]
+}

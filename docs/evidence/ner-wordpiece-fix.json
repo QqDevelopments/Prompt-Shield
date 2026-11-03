@@ -1,0 +1,623 @@
+{
+  "schema_version": 1,
+  "source_head": "d4b281b560add51e37446eadd904445ee98f40a3",
+  "source_state": "local working source; not committed or pushed by the agent",
+  "final_source_sha256": {
+    "services/engine/src/ner.rs": "475713018fe0ae4dcb7f3ca3d46b0c089dd1987556f88cbcd1b7ccc604c5e711",
+    "services/engine/src/bin/ner_evaluate.rs": "3134ac24557b33d9f81fd57a3ed42cd0e278c131d4908e8fd6f4a809cdd852ad",
+    "services/engine/tests/ner.rs": "35cfac6ca19d4a307962519312e6eddfc95e4262f293e026bab6d30f3d7a1b79",
+    "scripts/ner_pipeline.py": "cd9a3309e6238c57164d7697c385b1d25fc1b0f6919600aa540a7d236476cd65",
+    "scripts/test_ner_pipeline.py": "44c44131bccf0dc899fa314d31378ee56a701cd4dbd47a12622de1ac16ebcfda",
+    "models/general-ner.json": "2a15c62cb55baea9cdff5cdfb78bac9ea82f08cef6bb47d92c642ef607cec03e"
+  },
+  "span_aggregation": "first_confident_entity_wordpiece_v1",
+  "confidence_threshold": 0.5,
+  "acceptance_unchanged": {
+    "overall_f1_drop": 0.01,
+    "overall_recall_drop": 0.01,
+    "class_recall_drop": 0.02
+  },
+  "production_model_sha256_unchanged": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+  "evaluation": {
+    "original_windows": {
+      "passed": true,
+      "evaluated": 2000,
+      "rejected_ids": [],
+      "scores": {
+        "fp32": {
+          "PERSON": {
+            "precision": 0.7563091482649842,
+            "recall": 0.8647430117222723,
+            "f1": 0.806899453092133,
+            "gold": 1109,
+            "matched": 959,
+            "predicted": 1268
+          },
+          "ORGANIZATION": {
+            "precision": 0.5125,
+            "recall": 0.6680244399185336,
+            "f1": 0.5800176834659593,
+            "gold": 982,
+            "matched": 656,
+            "predicted": 1280
+          },
+          "LOCATION": {
+            "precision": 0.6604651162790698,
+            "recall": 0.744429882044561,
+            "f1": 0.6999383857054837,
+            "gold": 1526,
+            "matched": 1136,
+            "predicted": 1720
+          },
+          "overall": {
+            "precision": 0.64456419868791,
+            "recall": 0.7605750622062483,
+            "f1": 0.6977805960684844,
+            "gold": 3617,
+            "predicted": 4268,
+            "matched": 2751
+          }
+        },
+        "existing": {
+          "PERSON": {
+            "precision": 0.7509819324430479,
+            "recall": 0.8620378719567178,
+            "f1": 0.8026868178001679,
+            "gold": 1109,
+            "matched": 956,
+            "predicted": 1273
+          },
+          "ORGANIZATION": {
+            "precision": 0.5077760497667185,
+            "recall": 0.664969450101833,
+            "f1": 0.5758377425044092,
+            "gold": 982,
+            "matched": 653,
+            "predicted": 1286
+          },
+          "LOCATION": {
+            "precision": 0.6567944250871081,
+            "recall": 0.7411533420707732,
+            "f1": 0.6964285714285714,
+            "gold": 1526,
+            "matched": 1131,
+            "predicted": 1722
+          },
+          "overall": {
+            "precision": 0.6400373744452231,
+            "recall": 0.7575338678462814,
+            "f1": 0.6938465434287161,
+            "gold": 3617,
+            "predicted": 4281,
+            "matched": 2740
+          }
+        },
+        "candidate": {
+          "PERSON": {
+            "precision": 0.7593328038125496,
+            "recall": 0.8620378719567178,
+            "f1": 0.8074324324324325,
+            "gold": 1109,
+            "matched": 956,
+            "predicted": 1259
+          },
+          "ORGANIZATION": {
+            "precision": 0.5102201257861635,
+            "recall": 0.6608961303462322,
+            "f1": 0.5758651286601596,
+            "gold": 982,
+            "matched": 649,
+            "predicted": 1272
+          },
+          "LOCATION": {
+            "precision": 0.6509488211615871,
+            "recall": 0.7418086500655308,
+            "f1": 0.693415007656968,
+            "gold": 1526,
+            "matched": 1132,
+            "predicted": 1739
+          },
+          "overall": {
+            "precision": 0.6409836065573771,
+            "recall": 0.7567044512026542,
+            "f1": 0.694053505768987,
+            "gold": 3617,
+            "predicted": 4270,
+            "matched": 2737
+          }
+        },
+        "candidate-repeat": {
+          "PERSON": {
+            "precision": 0.7593328038125496,
+            "recall": 0.8620378719567178,
+            "f1": 0.8074324324324325,
+            "gold": 1109,
+            "matched": 956,
+            "predicted": 1259
+          },
+          "ORGANIZATION": {
+            "precision": 0.5102201257861635,
+            "recall": 0.6608961303462322,
+            "f1": 0.5758651286601596,
+            "gold": 982,
+            "matched": 649,
+            "predicted": 1272
+          },
+          "LOCATION": {
+            "precision": 0.6509488211615871,
+            "recall": 0.7418086500655308,
+            "f1": 0.693415007656968,
+            "gold": 1526,
+            "matched": 1132,
+            "predicted": 1739
+          },
+          "overall": {
+            "precision": 0.6409836065573771,
+            "recall": 0.7567044512026542,
+            "f1": 0.694053505768987,
+            "gold": 3617,
+            "predicted": 4270,
+            "matched": 2737
+          }
+        }
+      },
+      "corpus_sha256": "ab42cb89425c4a874323de9a49322fd1e36734c81daa4e3129ffc07d5141d3ee",
+      "selection": "ascending SHA256 of UTF-8 example ID, then ID",
+      "artifacts": {
+        "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+        "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+        "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+        "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+      },
+      "comparison_sha256": "37a7f508b52940f240fc80acb1f0286e6cb8e182d0c826d7e6970334e8ff509a"
+    },
+    "confirmation_windows": {
+      "passed": true,
+      "evaluated": 2000,
+      "rejected_ids": [],
+      "scores": {
+        "fp32": {
+          "PERSON": {
+            "precision": 0.7651349380014588,
+            "recall": 0.8473344103392568,
+            "f1": 0.8041395170563433,
+            "gold": 1238,
+            "matched": 1049,
+            "predicted": 1371
+          },
+          "ORGANIZATION": {
+            "precision": 0.47686832740213525,
+            "recall": 0.6504854368932039,
+            "f1": 0.5503080082135523,
+            "gold": 1030,
+            "matched": 670,
+            "predicted": 1405
+          },
+          "LOCATION": {
+            "precision": 0.6348823174411587,
+            "recall": 0.7245179063360881,
+            "f1": 0.6767449340623994,
+            "gold": 1452,
+            "matched": 1052,
+            "predicted": 1657
+          },
+          "overall": {
+            "precision": 0.6250845928265283,
+            "recall": 0.7448924731182796,
+            "f1": 0.679749785355084,
+            "gold": 3720,
+            "predicted": 4433,
+            "matched": 2771
+          }
+        },
+        "existing": {
+          "PERSON": {
+            "precision": 0.7565028901734104,
+            "recall": 0.845718901453958,
+            "f1": 0.7986270022883295,
+            "gold": 1238,
+            "matched": 1047,
+            "predicted": 1384
+          },
+          "ORGANIZATION": {
+            "precision": 0.4771101573676681,
+            "recall": 0.6475728155339806,
+            "f1": 0.5494233937397035,
+            "gold": 1030,
+            "matched": 667,
+            "predicted": 1398
+          },
+          "LOCATION": {
+            "precision": 0.6324324324324324,
+            "recall": 0.7252066115702479,
+            "f1": 0.6756496631376323,
+            "gold": 1452,
+            "matched": 1053,
+            "predicted": 1665
+          },
+          "overall": {
+            "precision": 0.6222172250955701,
+            "recall": 0.7438172043010752,
+            "f1": 0.6776049957144606,
+            "gold": 3720,
+            "predicted": 4447,
+            "matched": 2767
+          }
+        },
+        "candidate": {
+          "PERSON": {
+            "precision": 0.7560262965668371,
+            "recall": 0.8360258481421647,
+            "f1": 0.7940161104718065,
+            "gold": 1238,
+            "matched": 1035,
+            "predicted": 1369
+          },
+          "ORGANIZATION": {
+            "precision": 0.4707142857142857,
+            "recall": 0.6398058252427185,
+            "f1": 0.5423868312757202,
+            "gold": 1030,
+            "matched": 659,
+            "predicted": 1400
+          },
+          "LOCATION": {
+            "precision": 0.633033033033033,
+            "recall": 0.7258953168044077,
+            "f1": 0.6762913057427014,
+            "gold": 1452,
+            "matched": 1054,
+            "predicted": 1665
+          },
+          "overall": {
+            "precision": 0.6197564276048715,
+            "recall": 0.7387096774193549,
+            "f1": 0.6740250183958794,
+            "gold": 3720,
+            "predicted": 4434,
+            "matched": 2748
+          }
+        },
+        "candidate-repeat": {
+          "PERSON": {
+            "precision": 0.7560262965668371,
+            "recall": 0.8360258481421647,
+            "f1": 0.7940161104718065,
+            "gold": 1238,
+            "matched": 1035,
+            "predicted": 1369
+          },
+          "ORGANIZATION": {
+            "precision": 0.4707142857142857,
+            "recall": 0.6398058252427185,
+            "f1": 0.5423868312757202,
+            "gold": 1030,
+            "matched": 659,
+            "predicted": 1400
+          },
+          "LOCATION": {
+            "precision": 0.633033033033033,
+            "recall": 0.7258953168044077,
+            "f1": 0.6762913057427014,
+            "gold": 1452,
+            "matched": 1054,
+            "predicted": 1665
+          },
+          "overall": {
+            "precision": 0.6197564276048715,
+            "recall": 0.7387096774193549,
+            "f1": 0.6740250183958794,
+            "gold": 3720,
+            "predicted": 4434,
+            "matched": 2748
+          }
+        }
+      },
+      "corpus_sha256": "423f5448bf39941597c5f5d213eecab692143fb2e7d0c4b63be7d453673abc00",
+      "selection": "SHA256 order, positions 2001 through 4000; disjoint confirmation sample",
+      "artifacts": {
+        "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+        "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+        "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+        "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+      },
+      "comparison_sha256": "ea9377e8dbb88ae2d410788c24410b6ee4408f0e667c061c4dcc20df12dc02ef"
+    },
+    "original_linux_rust_1_90": {
+      "passed": true,
+      "evaluated": 2000,
+      "rejected_ids": [],
+      "scores": {
+        "fp32": {
+          "PERSON": {
+            "precision": 0.7563091482649842,
+            "recall": 0.8647430117222723,
+            "f1": 0.806899453092133,
+            "gold": 1109,
+            "matched": 959,
+            "predicted": 1268
+          },
+          "ORGANIZATION": {
+            "precision": 0.5125,
+            "recall": 0.6680244399185336,
+            "f1": 0.5800176834659593,
+            "gold": 982,
+            "matched": 656,
+            "predicted": 1280
+          },
+          "LOCATION": {
+            "precision": 0.6604651162790698,
+            "recall": 0.744429882044561,
+            "f1": 0.6999383857054837,
+            "gold": 1526,
+            "matched": 1136,
+            "predicted": 1720
+          },
+          "overall": {
+            "precision": 0.64456419868791,
+            "recall": 0.7605750622062483,
+            "f1": 0.6977805960684844,
+            "gold": 3617,
+            "predicted": 4268,
+            "matched": 2751
+          }
+        },
+        "existing": {
+          "PERSON": {
+            "precision": 0.7509819324430479,
+            "recall": 0.8620378719567178,
+            "f1": 0.8026868178001679,
+            "gold": 1109,
+            "matched": 956,
+            "predicted": 1273
+          },
+          "ORGANIZATION": {
+            "precision": 0.5077760497667185,
+            "recall": 0.664969450101833,
+            "f1": 0.5758377425044092,
+            "gold": 982,
+            "matched": 653,
+            "predicted": 1286
+          },
+          "LOCATION": {
+            "precision": 0.6567944250871081,
+            "recall": 0.7411533420707732,
+            "f1": 0.6964285714285714,
+            "gold": 1526,
+            "matched": 1131,
+            "predicted": 1722
+          },
+          "overall": {
+            "precision": 0.6400373744452231,
+            "recall": 0.7575338678462814,
+            "f1": 0.6938465434287161,
+            "gold": 3617,
+            "predicted": 4281,
+            "matched": 2740
+          }
+        },
+        "candidate": {
+          "PERSON": {
+            "precision": 0.7593328038125496,
+            "recall": 0.8620378719567178,
+            "f1": 0.8074324324324325,
+            "gold": 1109,
+            "matched": 956,
+            "predicted": 1259
+          },
+          "ORGANIZATION": {
+            "precision": 0.5102201257861635,
+            "recall": 0.6608961303462322,
+            "f1": 0.5758651286601596,
+            "gold": 982,
+            "matched": 649,
+            "predicted": 1272
+          },
+          "LOCATION": {
+            "precision": 0.6509488211615871,
+            "recall": 0.7418086500655308,
+            "f1": 0.693415007656968,
+            "gold": 1526,
+            "matched": 1132,
+            "predicted": 1739
+          },
+          "overall": {
+            "precision": 0.6409836065573771,
+            "recall": 0.7567044512026542,
+            "f1": 0.694053505768987,
+            "gold": 3617,
+            "predicted": 4270,
+            "matched": 2737
+          }
+        },
+        "candidate-repeat": {
+          "PERSON": {
+            "precision": 0.7593328038125496,
+            "recall": 0.8620378719567178,
+            "f1": 0.8074324324324325,
+            "gold": 1109,
+            "matched": 956,
+            "predicted": 1259
+          },
+          "ORGANIZATION": {
+            "precision": 0.5102201257861635,
+            "recall": 0.6608961303462322,
+            "f1": 0.5758651286601596,
+            "gold": 982,
+            "matched": 649,
+            "predicted": 1272
+          },
+          "LOCATION": {
+            "precision": 0.6509488211615871,
+            "recall": 0.7418086500655308,
+            "f1": 0.693415007656968,
+            "gold": 1526,
+            "matched": 1132,
+            "predicted": 1739
+          },
+          "overall": {
+            "precision": 0.6409836065573771,
+            "recall": 0.7567044512026542,
+            "f1": 0.694053505768987,
+            "gold": 3617,
+            "predicted": 4270,
+            "matched": 2737
+          }
+        }
+      },
+      "corpus_sha256": "ab42cb89425c4a874323de9a49322fd1e36734c81daa4e3129ffc07d5141d3ee",
+      "selection": "ascending SHA256 of UTF-8 example ID, then ID",
+      "artifacts": {
+        "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+        "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+        "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+        "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+      },
+      "comparison_sha256": "601c9fbab8b424ea1e1490f8ed1d82e435ad07a60f8504d782c010c4048c5348"
+    }
+  },
+  "confirmation_sample_disjoint": true,
+  "conversion": {
+    "options": {
+      "weight_type": "QInt8",
+      "per_channel": false,
+      "reduce_range": false,
+      "operators": [
+        "MatMul",
+        "Gemm"
+      ],
+      "extra_options": {
+        "MatMulConstBOnly": true
+      }
+    },
+    "source_sha256": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+    "output_sha256": [
+      "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+      "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+    ],
+    "reproducible": true
+  },
+  "public_service_before_after": {
+    "examples": 2000,
+    "inspection_calls_after": 4000,
+    "restoration_calls_after": 4000,
+    "before": {
+      "categories": {
+        "exact": 2247,
+        "type_only": 97,
+        "full_coverage_boundary": 399,
+        "partial_punctuation_only": 38,
+        "partial_content": 484,
+        "missed": 352
+      },
+      "by_class": {
+        "PERSON": {
+          "exact": 619,
+          "type_only": 21,
+          "full_coverage_boundary": 202,
+          "partial_punctuation_only": 17,
+          "partial_content": 221,
+          "missed": 29
+        },
+        "ORGANIZATION": {
+          "exact": 603,
+          "type_only": 43,
+          "full_coverage_boundary": 69,
+          "partial_punctuation_only": 10,
+          "partial_content": 136,
+          "missed": 121
+        },
+        "LOCATION": {
+          "exact": 1025,
+          "type_only": 33,
+          "full_coverage_boundary": 128,
+          "partial_punctuation_only": 11,
+          "partial_content": 127,
+          "missed": 202
+        }
+      },
+      "fully_covered_entities": 2743,
+      "examples_with_uncovered_gold": 603,
+      "predicted_spans_without_supported_gold_overlap": 1021,
+      "non_gold_masked_nonspace_characters": 9166,
+      "gold_nonspace_characters": 40499,
+      "uncovered_gold_nonspace_characters": 5950,
+      "uncovered_gold_alphanumeric_characters": 5816
+    },
+    "after": {
+      "categories": {
+        "exact": 2740,
+        "type_only": 132,
+        "full_coverage_boundary": 140,
+        "partial_punctuation_only": 43,
+        "partial_content": 210,
+        "missed": 352
+      },
+      "by_class": {
+        "PERSON": {
+          "exact": 956,
+          "type_only": 30,
+          "full_coverage_boundary": 32,
+          "partial_punctuation_only": 20,
+          "partial_content": 42,
+          "missed": 29
+        },
+        "ORGANIZATION": {
+          "exact": 653,
+          "type_only": 57,
+          "full_coverage_boundary": 46,
+          "partial_punctuation_only": 12,
+          "partial_content": 93,
+          "missed": 121
+        },
+        "LOCATION": {
+          "exact": 1131,
+          "type_only": 45,
+          "full_coverage_boundary": 62,
+          "partial_punctuation_only": 11,
+          "partial_content": 75,
+          "missed": 202
+        }
+      },
+      "fully_covered_entities": 3012,
+      "examples_with_uncovered_gold": 445,
+      "predicted_spans_without_supported_gold_overlap": 896,
+      "non_gold_masked_nonspace_characters": 9901,
+      "gold_nonspace_characters": 40499,
+      "uncovered_gold_nonspace_characters": 5001,
+      "uncovered_gold_alphanumeric_characters": 4867
+    },
+    "coverage_changes": {
+      "incomplete_to_fully_covered": 269,
+      "entities_with_any_newly_covered_characters": 316,
+      "newly_covered_nonspace_characters": 949
+    }
+  },
+  "checks": {
+    "rust_public_and_decoder_tests_passed": 11,
+    "explicit_model_tests_passed": 4,
+    "python_behavior_tests_passed": 15,
+    "rust_clippy_all_targets": "passed",
+    "rust_fmt": "passed",
+    "python_ruff_lint_and_format": "passed",
+    "git_diff_check": "passed"
+  },
+  "benchmark": {
+    "command": "NER_BENCH=true cargo bench --locked --features ner --bench sanitization -- --sample-size 10 --warm-up-time 1 --measurement-time 1",
+    "scope": "local native Windows Criterion; short synthetic inputs; not P99 or sustained capacity",
+    "log_sha256": "ba547291004f8fc21f0aa4d9da945116ed1444219a50bbb7fad1971eb1f20da2",
+    "central_estimates": {
+      "clean_ns": 233.25,
+      "masked_us": 1.0449,
+      "blocked_ns": 227.57,
+      "ner_short_ms": 3.9252
+    }
+  },
+  "limitations": [
+    "Same English Few-NERD dataset for discovery and disjoint confirmation; no Turkish or domain validation.",
+    "The original Windows discovery reports were created before aggregation-version metadata was added; the Linux and confirmation reports include the new version. Decoder behavior is identical.",
+    "Full-word expansion masks 735 additional non-reference characters on the service replay; not every missed entity is corrected.",
+    "A fresh hosted GitHub Actions run and full sustained-load matrix were not run for this working-source change.",
+    "No external LLM was contacted; real service verification covers InspectAndSanitize and DeAnonymize with the pinned INT8 model."
+  ]
+}

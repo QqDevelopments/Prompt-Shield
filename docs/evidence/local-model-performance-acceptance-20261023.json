@@ -1,0 +1,797 @@
+{
+  "schema_version": 1,
+  "run_id": "RUN-20261023-C27-LOCAL-05",
+  "date": "2026-10-23",
+  "source_revision": "19c9b9090b9ecd5a06ec5b02fcf3e2cdf7e70036",
+  "production_source_manifest_sha256": "e68dabed69abfa8e723f9b0e1f4d4015a0e5dd78e96c9d10adfc7f7ec708ca39",
+  "all_production_source_manifests_identical": true,
+  "environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "logical_cpus": 16,
+    "versions": {
+      "go": "go version go1.27.0 windows/amd64",
+      "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "node": "v24.12.0",
+      "docker": "29.6.2"
+    },
+    "engine_image": "sha256:009d14de8308f9fce1e38a8d42924b3731463598a5b75a925da1947aa451c015",
+    "bench_image": "sha256:adb8a4c4d377cb4f842d0956a17284fddd9ee7c218a1f9ab9a71169bab2a7c57",
+    "model_sha256": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+    "tokenizer_sha256": "343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1",
+    "cases_sha256": "b2c5e08014081ac3f84cc3c9272ac27ced32df366e90a47b71b8c5a53d2a4ef0",
+    "sessions": 1,
+    "threads": 4,
+    "spinning": "true",
+    "engine_cpus": "0-7",
+    "load_cpus": "8-15",
+    "memory_limit": 1073741824,
+    "profiling": false
+  },
+  "quality": {
+    "passed": true,
+    "failures": [],
+    "evaluated": 2000,
+    "rejected_count": 0,
+    "corpus_sha256": "ab42cb89425c4a874323de9a49322fd1e36734c81daa4e3129ffc07d5141d3ee",
+    "scores": {
+      "fp32": {
+        "PERSON": {
+          "precision": 0.7563091482649842,
+          "recall": 0.8647430117222723,
+          "f1": 0.806899453092133,
+          "gold": 1109,
+          "matched": 959,
+          "predicted": 1268
+        },
+        "ORGANIZATION": {
+          "precision": 0.5125,
+          "recall": 0.6680244399185336,
+          "f1": 0.5800176834659593,
+          "gold": 982,
+          "matched": 656,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6604651162790698,
+          "recall": 0.744429882044561,
+          "f1": 0.6999383857054837,
+          "gold": 1526,
+          "matched": 1136,
+          "predicted": 1720
+        },
+        "overall": {
+          "precision": 0.64456419868791,
+          "recall": 0.7605750622062483,
+          "f1": 0.6977805960684844,
+          "gold": 3617,
+          "predicted": 4268,
+          "matched": 2751
+        }
+      },
+      "existing": {
+        "PERSON": {
+          "precision": 0.7509819324430479,
+          "recall": 0.8620378719567178,
+          "f1": 0.8026868178001679,
+          "gold": 1109,
+          "matched": 956,
+          "predicted": 1273
+        },
+        "ORGANIZATION": {
+          "precision": 0.5077760497667185,
+          "recall": 0.664969450101833,
+          "f1": 0.5758377425044092,
+          "gold": 982,
+          "matched": 653,
+          "predicted": 1286
+        },
+        "LOCATION": {
+          "precision": 0.6567944250871081,
+          "recall": 0.7411533420707732,
+          "f1": 0.6964285714285714,
+          "gold": 1526,
+          "matched": 1131,
+          "predicted": 1722
+        },
+        "overall": {
+          "precision": 0.6400373744452231,
+          "recall": 0.7575338678462814,
+          "f1": 0.6938465434287161,
+          "gold": 3617,
+          "predicted": 4281,
+          "matched": 2740
+        }
+      },
+      "candidate": {
+        "PERSON": {
+          "precision": 0.7593328038125496,
+          "recall": 0.8620378719567178,
+          "f1": 0.8074324324324325,
+          "gold": 1109,
+          "matched": 956,
+          "predicted": 1259
+        },
+        "ORGANIZATION": {
+          "precision": 0.5102201257861635,
+          "recall": 0.6608961303462322,
+          "f1": 0.5758651286601596,
+          "gold": 982,
+          "matched": 649,
+          "predicted": 1272
+        },
+        "LOCATION": {
+          "precision": 0.6509488211615871,
+          "recall": 0.7418086500655308,
+          "f1": 0.693415007656968,
+          "gold": 1526,
+          "matched": 1132,
+          "predicted": 1739
+        },
+        "overall": {
+          "precision": 0.6409836065573771,
+          "recall": 0.7567044512026542,
+          "f1": 0.694053505768987,
+          "gold": 3617,
+          "predicted": 4270,
+          "matched": 2737
+        }
+      },
+      "candidate-repeat": {
+        "PERSON": {
+          "precision": 0.7593328038125496,
+          "recall": 0.8620378719567178,
+          "f1": 0.8074324324324325,
+          "gold": 1109,
+          "matched": 956,
+          "predicted": 1259
+        },
+        "ORGANIZATION": {
+          "precision": 0.5102201257861635,
+          "recall": 0.6608961303462322,
+          "f1": 0.5758651286601596,
+          "gold": 982,
+          "matched": 649,
+          "predicted": 1272
+        },
+        "LOCATION": {
+          "precision": 0.6509488211615871,
+          "recall": 0.7418086500655308,
+          "f1": 0.693415007656968,
+          "gold": 1526,
+          "matched": 1132,
+          "predicted": 1739
+        },
+        "overall": {
+          "precision": 0.6409836065573771,
+          "recall": 0.7567044512026542,
+          "f1": 0.694053505768987,
+          "gold": 3617,
+          "predicted": 4270,
+          "matched": 2737
+        }
+      }
+    },
+    "artifacts": {
+      "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+      "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+      "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+      "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+    },
+    "conversion_reproducible": true,
+    "conversion_options": {
+      "weight_type": "QInt8",
+      "per_channel": false,
+      "reduce_range": false,
+      "operators": [
+        "MatMul",
+        "Gemm"
+      ],
+      "extra_options": {
+        "MatMulConstBOnly": true
+      }
+    },
+    "scope": "Pinned 2000-example English Few-NERD cross-dataset INT8-versus-FP32 gates; no Turkish/domain or model-promotion claim",
+    "dataset_provenance": {
+      "name": "DFKI-SLT/few-nerd",
+      "revision": "205f3e9c9f3577ea2561d43f2f62dc249ab92d5b",
+      "split": "supervised/test",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Ding et al., Few-NERD: A Few-Shot Named Entity Recognition Dataset, ACL 2021",
+      "sample_count": 2000,
+      "selection": "ascending SHA256 of UTF-8 example ID, then ID",
+      "coarse_labels": {
+        "4": "LOCATION",
+        "5": "ORGANIZATION",
+        "7": "PERSON"
+      },
+      "other_labels": "O for the supported three-class evaluation; boundaries follow contiguous fine labels"
+    },
+    "unchanged_acceptance_thresholds": {
+      "overall_f1_drop": 0.01,
+      "overall_recall_drop": 0.01,
+      "class_recall_drop": 0.02
+    }
+  },
+  "conditions": [
+    {
+      "condition": "baseline/trial-0",
+      "scenario": "ner-32",
+      "requests": 16248,
+      "inputs": [
+        {
+          "bytes": 150,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-32",
+          "tokens": 32
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 16248,
+      "outcomes": {
+        "ok": 16248
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 16248,
+        "p50_ms": 28.248775192720977,
+        "p95_ms": 36.955606711929185,
+        "p99_ms": 48.829430615683364,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 120.030911811,
+      "warmup_seconds": 30.003470382,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 0,
+      "cancellation_signaled": 0,
+      "recovered": true,
+      "recovery_ms": 0.884004,
+      "peak_cgroup_memory_bytes": 229191680,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 209,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": false
+    },
+    {
+      "condition": "baseline/trial-1",
+      "scenario": "ner-32",
+      "requests": 16600,
+      "inputs": [
+        {
+          "bytes": 150,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-32",
+          "tokens": 32
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 16600,
+      "outcomes": {
+        "ok": 16600
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 16600,
+        "p50_ms": 28.248775192720977,
+        "p95_ms": 35.86871837543518,
+        "p99_ms": 40.41789648922499,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 120.02401879,
+      "warmup_seconds": 30.005137002,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 0,
+      "cancellation_signaled": 0,
+      "recovered": true,
+      "recovery_ms": 0.797991,
+      "peak_cgroup_memory_bytes": 226918400,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 210,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": false
+    },
+    {
+      "condition": "baseline/trial-2",
+      "scenario": "ner-32",
+      "requests": 15043,
+      "inputs": [
+        {
+          "bytes": 150,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-32",
+          "tokens": 32
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 15043,
+      "outcomes": {
+        "ok": 15043
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 15043,
+        "p50_ms": 31.831553782759162,
+        "p95_ms": 39.22918272254902,
+        "p99_ms": 49.31773492184023,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 120.025066213,
+      "warmup_seconds": 30.009000265,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 0,
+      "cancellation_signaled": 0,
+      "recovered": true,
+      "recovery_ms": 0.773609,
+      "peak_cgroup_memory_bytes": 227713024,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 207,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": false
+    },
+    {
+      "condition": "cancellation",
+      "scenario": "ner-512",
+      "requests": 611,
+      "inputs": [
+        {
+          "bytes": 2550,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-512",
+          "tokens": 512
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 306,
+      "outcomes": {
+        "canceled": 305,
+        "ok": 306
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 611,
+        "p50_ms": 92.3110671492165,
+        "p95_ms": 423.0850100560709,
+        "p99_ms": 440.2639986392474,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 30.35296498,
+      "warmup_seconds": 5.050244038,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 305,
+      "cancellation_signaled": 305,
+      "recovered": true,
+      "recovery_ms": 0.760836,
+      "peak_cgroup_memory_bytes": 288374784,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 51,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": null
+    },
+    {
+      "condition": "long-128",
+      "scenario": "ner-128",
+      "requests": 2742,
+      "inputs": [
+        {
+          "bytes": 630,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-128",
+          "tokens": 128
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 2742,
+      "outcomes": {
+        "ok": 2742
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 2742,
+        "p50_ms": 86.10013169741156,
+        "p95_ms": 105.0587433254299,
+        "p99_ms": 114.90129402702165,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 60.074168923,
+      "warmup_seconds": 10.010067827,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 0,
+      "cancellation_signaled": 0,
+      "recovered": true,
+      "recovery_ms": 0.705788,
+      "peak_cgroup_memory_bytes": 229576704,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 100,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": null
+    },
+    {
+      "condition": "long-512",
+      "scenario": "ner-512",
+      "requests": 601,
+      "inputs": [
+        {
+          "bytes": 2550,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-512",
+          "tokens": 512
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 601,
+      "outcomes": {
+        "ok": 601
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 601,
+        "p50_ms": 402.55082147479544,
+        "p95_ms": 444.66664862564016,
+        "p99_ms": 458.1405230466458,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 60.371559252,
+      "warmup_seconds": 10.093803832,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 0,
+      "cancellation_signaled": 0,
+      "recovered": true,
+      "recovery_ms": 0.671455,
+      "peak_cgroup_memory_bytes": 281747456,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 99,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": null
+    },
+    {
+      "condition": "soak",
+      "scenario": "mixed-long",
+      "requests": 72988,
+      "inputs": [
+        {
+          "bytes": 64,
+          "contextual": false,
+          "expected": "blocked",
+          "name": "blocked-64",
+          "tokens": 0
+        },
+        {
+          "bytes": 64,
+          "contextual": false,
+          "expected": "allowed",
+          "name": "clean-64",
+          "tokens": 0
+        },
+        {
+          "bytes": 64,
+          "contextual": false,
+          "expected": "masked",
+          "name": "masked-64",
+          "tokens": 0
+        },
+        {
+          "bytes": 630,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-128",
+          "tokens": 128
+        },
+        {
+          "bytes": 2550,
+          "contextual": true,
+          "expected": "masked",
+          "name": "ner-512",
+          "tokens": 512
+        }
+      ],
+      "transport": "grpc",
+      "os": "linux",
+      "architecture": "amd64",
+      "measurement_clock": "Go monotonic clock",
+      "successful_requests": 72988,
+      "outcomes": {
+        "expected_block": 7298,
+        "ok": 65690
+      },
+      "error_rate": 0,
+      "all_latency_ms": {
+        "count": 72988,
+        "p50_ms": 0.41883040322112713,
+        "p95_ms": 257.2517202968304,
+        "p99_ms": 278.56683321448776,
+        "relative_bucket_width": 0.01
+      },
+      "duration_seconds": 900.220971854,
+      "warmup_seconds": 30.079392796,
+      "concurrency": 4,
+      "deadline_ms": 10000,
+      "cancellation_selected": 0,
+      "cancellation_signaled": 0,
+      "recovered": true,
+      "recovery_ms": 0.891247,
+      "peak_cgroup_memory_bytes": 283611136,
+      "oom_events": 0,
+      "oom_kills": 0,
+      "resource_sample_count": 1292,
+      "resource_errors": [],
+      "cpu_throttled_usec": 0,
+      "baseline_gate_passed": null
+    }
+  ],
+  "native_cancellation": {
+    "scope": "real public Rust service dispatch; HTTP/gRPC transport cancellation measured separately",
+    "iterations": 20,
+    "attempts": 20,
+    "observation_misses": 0,
+    "all_recovered": true,
+    "max_native_drain_ms": 13.4157,
+    "samples": [
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 11.5855,
+        "dispatch_return_ms": 0.06420000000000001,
+        "inflight_after_abort": 4,
+        "inflight_before_abort": 4,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.211500000000001,
+        "dispatch_return_ms": 0.015099999999999999,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 11.3821,
+        "dispatch_return_ms": 0.0178,
+        "inflight_after_abort": 2,
+        "inflight_before_abort": 2,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 13.4157,
+        "dispatch_return_ms": 0.0144,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 11.8444,
+        "dispatch_return_ms": 0.0138,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.3136,
+        "dispatch_return_ms": 0.0132,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.659500000000001,
+        "dispatch_return_ms": 0.0157,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 13.173,
+        "dispatch_return_ms": 0.012799999999999999,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 11.514,
+        "dispatch_return_ms": 0.012799999999999999,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 2,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.7635,
+        "dispatch_return_ms": 0.013600000000000001,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 13.1343,
+        "dispatch_return_ms": 0.0143,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 2,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.1384,
+        "dispatch_return_ms": 0.0135,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.8231,
+        "dispatch_return_ms": 0.016,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.1369,
+        "dispatch_return_ms": 0.017,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.4126,
+        "dispatch_return_ms": 0.017499999999999998,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 2,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.783199999999999,
+        "dispatch_return_ms": 0.0135,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.6774,
+        "dispatch_return_ms": 0.0162,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.3374,
+        "dispatch_return_ms": 0.011,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.9014,
+        "dispatch_return_ms": 0.014,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 2,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      },
+      {
+        "aborted_dispatches": 4,
+        "all_work_drained_ms": 12.065100000000001,
+        "dispatch_return_ms": 0.0123,
+        "inflight_after_abort": 1,
+        "inflight_before_abort": 1,
+        "ner_inflight_after_abort": 1,
+        "ner_inflight_before_abort": 1,
+        "recovery_passed": true
+      }
+    ]
+  },
+  "execution_complete": true,
+  "p99_target_ms": 6,
+  "all_three_baseline_repetitions_accepted": false,
+  "overall_acceptance": "PASS: user accepted local C27; latency optimization target remains unmet",
+  "acceptance_decision": {
+    "date": "2026-10-23",
+    "accepted_by": "user",
+    "scope": "C27 local acceptance",
+    "status": "PASS",
+    "previous_classification": "FAIL: measured P99 target unmet",
+    "latency_target_release_blocking": false,
+    "reason": "The user accepted the completed quality, cancellation/recovery, resource and sustained-load checks and confirmed that the unmet 6 ms target does not block production release.",
+    "measurements_and_reference_gate_results_changed": false
+  },
+  "notes": [
+    "All quantiles are per-condition; no averaged percentiles.",
+    "Canceled outcomes in the deliberate cancellation condition are reported separately from errors.",
+    "The baseline gate is not applicable to long-input/cancellation/soak conditions.",
+    "The user accepted local C27 with the 6 ms target retained as a non-blocking production-release optimization goal; hosted deployment acceptance remains separate.",
+    "all_three_baseline_repetitions_accepted and per-condition baseline_gate_passed describe the strict optimization reference, not the subsequent user acceptance of local C27.",
+    "This shared workstation also performed local model preparation and rollback work during parts of the early reference; do not describe the host as exclusively idle.",
+    "Production model/session/thread defaults were not changed; converted artifacts stayed in ignored output.",
+    "No hosted infrastructure exists per the user; no hosted, ingress, vendor-account or HTTP/SSE sustained-capacity acceptance is inferred."
+  ]
+}

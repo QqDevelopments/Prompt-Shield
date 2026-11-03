@@ -1,0 +1,439 @@
+name: Verify Community
+on:
+  workflow_dispatch:
+    inputs:
+      linux_runner:
+        description: Linux verification runner
+        type: choice
+        default: "GitHub Cloud (ubuntu-24.04)"
+        options:
+          - "Self-Hosted PC (WSL2/Docker - 0 mins)"
+          - "GitHub Cloud (ubuntu-24.04)"
+      run_benchmark_portability:
+        description: Run benchmark clock and report behavior
+        type: boolean
+        default: true
+      run_quality:
+        description: Run static, functional and frontend gates
+        type: boolean
+        default: true
+      run_integration:
+        description: Run real dependencies, NER, SDKs and microbenchmarks
+        type: boolean
+        default: true
+      run_model_evaluation:
+        description: Run reproducible INT8 and accuracy acceptance
+        type: boolean
+        default: true
+      run_clean_install:
+        description: Run fresh source-only Compose installation
+        type: boolean
+        default: true
+      run_load:
+        description: Run load, cancellation and resource evidence
+        type: boolean
+        default: true
+      full_load:
+        description: Use the complete load matrix when the load job is selected (approximately 160 minutes)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  prepare-linux-runner:
+    name: Prepare selected Linux runner
+    runs-on: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.linux_runner == 'Self-Hosted PC (WSL2/Docker - 0 mins)' && '["self-hosted", "Linux", "X64"]' || '"ubuntu-24.04"') }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install and check Linux runner prerequisites
+        shell: bash
+        run: bash scripts/bootstrap-linux-runner.sh
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.0'
+          cache: ${{ inputs.linux_runner != 'Self-Hosted PC (WSL2/Docker - 0 mins)' }}
+          cache-dependency-path: services/gateway/go.sum
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.12.0'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Install and check Rust toolchain
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if ! command -v rustup >/dev/null 2>&1; then
+            rustup_installer="$RUNNER_TEMP/rustup-init.sh"
+            curl --fail --location --silent --show-error https://sh.rustup.rs --output "$rustup_installer"
+            sh "$rustup_installer" -y --profile minimal
+          fi
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.cargo/bin:$PATH"
+          rustup toolchain install 1.90.0 --profile minimal --component clippy,rustfmt
+          rustup default 1.90.0
+      - name: Prefer selected Node.js toolchain
+        shell: bash
+        env:
+          SELECTED_NODE_BIN: ${{ runner.tool_cache }}/node/24.12.0/x64/bin
+        run: |
+          set -Eeuo pipefail
+          test -x "$SELECTED_NODE_BIN/node"
+          export PATH="$SELECTED_NODE_BIN:$PATH"
+          printf 'PATH=%s\n' "$PATH" >> "$GITHUB_ENV"
+          printf '%s\n' "$SELECTED_NODE_BIN" >> "$GITHUB_PATH"
+          node --version
+      - name: Verify selected toolchain
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          check_version() {
+            local command_name="$1"
+            local expected_pattern="$2"
+            local version_output
+            shift 2
+
+            if ! command -v "$command_name" >/dev/null 2>&1; then
+              echo "::error::Required command '$command_name' is not on PATH."
+              printf 'PATH=%s\n' "$PATH"
+              return 1
+            fi
+
+            version_output=$("$command_name" "$@" 2>&1)
+            printf '%s: %s (%s)\n' "$command_name" "$version_output" "$(command -v "$command_name")"
+            if [[ ! "$version_output" =~ $expected_pattern ]]; then
+              echo "::error::Unexpected $command_name version; expected pattern '$expected_pattern'."
+              return 1
+            fi
+          }
+
+          check_version go 'go1\.27(\.|$)' version
+          check_version node '^v24\.12\.' --version
+          check_version python 'Python 3\.14\.' --version
+          check_version rustc '1\.90\.' --version
+          command -v cargo >/dev/null
+          cargo --version
+
+  benchmark-portability:
+    name: Benchmark clock and report behavior
+    if: ${{ inputs.run_benchmark_portability }}
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.0'
+          cache-dependency-path: services/gateway/go.sum
+      - run: go test -count=1 -race ./cmd/bench
+        working-directory: services/gateway
+  quality:
+    name: Static, functional and frontend gates
+    needs: prepare-linux-runner
+    if: ${{ inputs.run_quality }}
+    runs-on: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.linux_runner == 'Self-Hosted PC (WSL2/Docker - 0 mins)' && '["self-hosted", "Linux", "X64"]' || '"ubuntu-24.04"') }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install and check Linux runner prerequisites
+        shell: bash
+        run: bash scripts/bootstrap-linux-runner.sh
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.0'
+          cache: ${{ inputs.linux_runner != 'Self-Hosted PC (WSL2/Docker - 0 mins)' }}
+          cache-dependency-path: services/gateway/go.sum
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.12.0'
+          cache: npm
+          cache-dependency-path: apps/web-console/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Pin Rust tooling
+        run: |
+          rustup toolchain install 1.90.0 --profile minimal --component clippy,rustfmt
+          rustup override set 1.90.0
+      - name: Install pinned Rust advisory scanner
+        run: cargo install cargo-audit --version 0.22.2 --locked
+      - name: Prefer selected Node.js toolchain
+        shell: bash
+        env:
+          SELECTED_NODE_BIN: ${{ runner.tool_cache }}/node/24.12.0/x64/bin
+        run: |
+          set -Eeuo pipefail
+          test -x "$SELECTED_NODE_BIN/node"
+          export PATH="$SELECTED_NODE_BIN:$PATH"
+          printf 'PATH=%s\n' "$PATH" >> "$GITHUB_ENV"
+          printf '%s\n' "$SELECTED_NODE_BIN" >> "$GITHUB_PATH"
+          node --version
+      - name: Rust public boundaries and lint
+        working-directory: services/engine
+        run: |
+          cargo fmt --check
+          cargo clippy --locked --all-targets --features evaluation -- -D warnings
+          cargo test --locked --features evaluation
+      - name: Go formatting, vet and ordinary tests
+        working-directory: services/gateway
+        run: |
+          test -z "$(gofmt -l cmd internal migrations)"
+          go vet ./...
+          go test -count=1 -race ./...
+      - name: Python evaluation behavior
+        run: |
+          python -m venv output/verification-env
+          output/verification-env/bin/python -m pip install -r scripts/verification-requirements.txt
+          output/verification-env/bin/ruff check scripts
+          output/verification-env/bin/ruff format --check scripts
+          python -m unittest discover -s scripts -p 'test_*.py'
+      - name: Generated protocol consistency
+        run: python scripts/verify_proto.py
+      - name: Frontend clean dependencies and quality
+        working-directory: apps/web-console
+        run: |
+          npm ci
+          npm run shared:check
+          npx playwright install --with-deps chromium firefox webkit
+          npm run format:check
+          npm run lint
+          npm run verify
+      - name: Real browser and service journeys
+        working-directory: apps/web-console
+        run: |
+          npm run test:e2e
+      - name: Vercel production package
+        working-directory: apps/web-console
+        env:
+          API_BASE_URL: https://api.prompt-shield.qqdevelopments.com
+          VERCEL_ENV: production
+        run: npm run build:hosted
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: browser-verification
+          path: output/playwright
+          retention-days: 14
+
+  integration:
+    name: Real dependencies, NER, SDKs and microbenchmarks
+    needs: prepare-linux-runner
+    if: ${{ inputs.run_integration }}
+    runs-on: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.linux_runner == 'Self-Hosted PC (WSL2/Docker - 0 mins)' && '["self-hosted", "Linux", "X64"]' || '"ubuntu-24.04"') }}
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: promptshield
+          POSTGRES_USER: promptshield
+          POSTGRES_PASSWORD: synthetic-ci-password
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U promptshield -d promptshield" --health-interval 5s --health-timeout 3s --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgres://promptshield:synthetic-ci-password@localhost:5432/promptshield?sslmode=disable
+      TEST_REDIS_URL: redis://localhost:6379/0
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install and check Linux runner prerequisites
+        shell: bash
+        run: bash scripts/bootstrap-linux-runner.sh
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.0'
+          cache: ${{ inputs.linux_runner != 'Self-Hosted PC (WSL2/Docker - 0 mins)' }}
+          cache-dependency-path: services/gateway/go.sum
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.12.0'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - run: |
+          rustup toolchain install 1.90.0 --profile minimal
+          rustup override set 1.90.0
+      - name: Prefer selected Node.js toolchain
+        shell: bash
+        env:
+          SELECTED_NODE_BIN: ${{ runner.tool_cache }}/node/24.12.0/x64/bin
+        run: |
+          set -Eeuo pipefail
+          test -x "$SELECTED_NODE_BIN/node"
+          export PATH="$SELECTED_NODE_BIN:$PATH"
+          printf 'PATH=%s\n' "$PATH" >> "$GITHUB_ENV"
+          printf '%s\n' "$SELECTED_NODE_BIN" >> "$GITHUB_PATH"
+          node --version
+      - name: Isolated SDK environment
+        run: |
+          python -m venv output/ci-sdk
+          output/ci-sdk/bin/python -m pip install openai==2.45.0 anthropic==1.4.0
+      - name: Mandatory integration boundaries (skips fail)
+        run: output/ci-sdk/bin/python scripts/ci_integration.py
+      - name: Explicit model service tests
+        working-directory: services/engine
+        run: cargo test --locked --features evaluation --test ner --test pool -- --include-ignored --test-threads=1
+      - name: Rust rules and NER microbenchmarks
+        shell: bash
+        working-directory: services/engine
+        env:
+          NER_BENCH: 'true'
+        run: |
+          cargo bench --locked --features ner --bench sanitization -- --sample-size 10 --warm-up-time 1 --measurement-time 1 | tee ../../output/ci-integration/rust-benchmarks.txt
+      - name: Go allocation microbenchmarks
+        shell: bash
+        working-directory: services/gateway
+        run: go test -run '^$' -bench=. -benchmem ./internal/api | tee ../../output/ci-integration/go-benchmarks.txt
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: integration-evidence
+          path: output/ci-integration
+          retention-days: 14
+
+  model-evaluation:
+    name: Reproducible INT8 and accuracy acceptance
+    needs: prepare-linux-runner
+    if: ${{ inputs.run_model_evaluation }}
+    runs-on: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.linux_runner == 'Self-Hosted PC (WSL2/Docker - 0 mins)' && '["self-hosted", "Linux", "X64"]' || '"ubuntu-24.04"') }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install and check Linux runner prerequisites
+        shell: bash
+        run: bash scripts/bootstrap-linux-runner.sh
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - run: |
+          rustup toolchain install 1.90.0 --profile minimal
+          rustup override set 1.90.0
+      - name: Locked model tools
+        run: |
+          python -m venv output/model-env
+          output/model-env/bin/python -m pip install -r scripts/model-requirements.txt
+          output/model-env/bin/python -m pip check
+      - name: Verified FP32, INT8 and corpus
+        run: output/model-env/bin/python scripts/ner_pipeline.py fetch
+      - name: Two independent INT8 conversions
+        run: output/model-env/bin/python scripts/ner_pipeline.py convert
+      - name: FP32 and INT8 accuracy gates
+        run: output/model-env/bin/python scripts/ner_pipeline.py evaluate
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: model-evaluation-evidence
+          path: |
+            output/model-evaluation/*-result.json
+            output/model-evaluation/comparison.json
+            output/model-evaluation/conversion.json
+            output/model-evaluation/corpus-manifest.json
+          retention-days: 14
+
+  clean-install:
+    name: Fresh source-only Compose installation
+    needs: prepare-linux-runner
+    if: ${{ inputs.run_clean_install }}
+    runs-on: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.linux_runner == 'Self-Hosted PC (WSL2/Docker - 0 mins)' && '["self-hosted", "Linux", "X64"]' || '"ubuntu-24.04"') }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install and check Linux runner prerequisites
+        shell: bash
+        run: bash scripts/bootstrap-linux-runner.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.12.0'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Prefer selected Node.js toolchain
+        shell: bash
+        env:
+          SELECTED_NODE_BIN: ${{ runner.tool_cache }}/node/24.12.0/x64/bin
+        run: |
+          set -Eeuo pipefail
+          test -x "$SELECTED_NODE_BIN/node"
+          export PATH="$SELECTED_NODE_BIN:$PATH"
+          printf 'PATH=%s\n' "$PATH" >> "$GITHUB_ENV"
+          printf '%s\n' "$SELECTED_NODE_BIN" >> "$GITHUB_PATH"
+          node --version
+      - run: python scripts/clean_install.py --output output/clean-install
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: clean-install-evidence
+          path: |
+            output/clean-install/result.json
+            output/clean-install/source-manifest.json
+            output/clean-install/smoke.json
+            output/clean-install/resources.json
+            output/clean-install/build.log
+            output/clean-install/compose.log
+          retention-days: 14
+
+  load:
+    name: Load, cancellation and resource evidence
+    needs: prepare-linux-runner
+    if: ${{ inputs.run_load }}
+    runs-on: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.linux_runner == 'Self-Hosted PC (WSL2/Docker - 0 mins)' && '["self-hosted", "Linux", "X64"]' || '"ubuntu-24.04"') }}
+    timeout-minutes: 210
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install and check Linux runner prerequisites
+        shell: bash
+        run: bash scripts/bootstrap-linux-runner.sh
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.0'
+          cache: ${{ inputs.linux_runner != 'Self-Hosted PC (WSL2/Docker - 0 mins)' }}
+          cache-dependency-path: services/gateway/go.sum
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.12.0'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - run: |
+          rustup toolchain install 1.90.0 --profile minimal
+          rustup override set 1.90.0
+      - name: Prefer selected Node.js toolchain
+        shell: bash
+        env:
+          SELECTED_NODE_BIN: ${{ runner.tool_cache }}/node/24.12.0/x64/bin
+        run: |
+          set -Eeuo pipefail
+          test -x "$SELECTED_NODE_BIN/node"
+          export PATH="$SELECTED_NODE_BIN:$PATH"
+          printf 'PATH=%s\n' "$PATH" >> "$GITHUB_ENV"
+          printf '%s\n' "$SELECTED_NODE_BIN" >> "$GITHUB_PATH"
+          node --version
+      - name: Real load and recovery
+        env:
+          LOAD_PROFILE: ${{ inputs.full_load && 'full' || 'smoke' }}
+        run: python scripts/run_load.py --profile "$LOAD_PROFILE" --output output/load
+      - name: Separate native allocation profile
+        run: python scripts/profile_native.py --workloads output/load/workloads.json --output output/native-profile
+      - name: Validate and summarize load evidence
+        run: python scripts/report_load.py output/load --output output/load/report
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: load-evidence
+          path: |
+            output/load/*.json
+            !output/load/*-connection.json
+            !output/load/workloads.json
+            !output/load/dependencies.json
+            output/load/go-benchmarks.txt
+            output/load/report.md
+            output/native-profile/*.json
+            output/native-profile/*.txt
+          retention-days: 14

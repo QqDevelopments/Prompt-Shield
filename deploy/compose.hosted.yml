@@ -1,0 +1,15 @@
+# Overlay the base Compose file for a privately operated hosted backend.
+services:
+  gateway:
+    build:
+      target: backend
+    environment:
+      ENVIRONMENT: production
+      DEPLOYMENT_MODE: hosted
+      PUBLIC_ENABLED: "true"
+      PUBLIC_HMAC_KEY: ${PUBLIC_HMAC_KEY:?Set a random PUBLIC_HMAC_KEY of at least 32 characters}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:?Set the HTTPS frontend origin}
+      OPENAI_API_KEY: ""
+      ANTHROPIC_API_KEY: ""
+      GEMINI_API_KEY: ""
+      GEMINI_BASE_URL: https://generativelanguage.googleapis.com/v1beta/openai

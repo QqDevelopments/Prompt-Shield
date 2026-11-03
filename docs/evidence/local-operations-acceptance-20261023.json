@@ -1,0 +1,70 @@
+{
+  "revision": "19c9b9090b9ecd5a06ec5b02fcf3e2cdf7e70036",
+  "observations": [
+    {
+      "check": "C26 pre-upgrade encrypted backup",
+      "status": "PASS",
+      "source_revision": "4c06aebf2beaf0adcc9ff9a9a2494c8456c0b657",
+      "wrong_key_rejected": true,
+      "metadata": {
+        "policy": {
+          "version": 2,
+          "mask_pii": true,
+          "block_secrets": true,
+          "contextual_pii": false,
+          "blocked_keywords": [
+            "synthetic-pre-upgrade-policy"
+          ]
+        },
+        "keys": 1,
+        "events": 1
+      }
+    },
+    {
+      "check": "C26 actual application upgrade",
+      "status": "PASS",
+      "target_revision": "19c9b9090b9ecd5a06ec5b02fcf3e2cdf7e70036",
+      "previous_key_authenticates": true
+    },
+    {
+      "check": "C26 actual cross-version rollback via protected backup",
+      "status": "PASS",
+      "restored_revision": "4c06aebf2beaf0adcc9ff9a9a2494c8456c0b657",
+      "restored_metadata": {
+        "policy": {
+          "version": 2,
+          "mask_pii": true,
+          "block_secrets": true,
+          "contextual_pii": false,
+          "blocked_keywords": [
+            "synthetic-pre-upgrade-policy"
+          ]
+        },
+        "keys": 1,
+        "events": 1
+      },
+      "old_session_invalidated": true,
+      "original_key_authenticates": true,
+      "uses_down_migrations": false
+    },
+    {
+      "check": "C26 stdout/stderr and audit privacy",
+      "status": "PASS",
+      "captured_log_bytes": 204,
+      "captured_audit_bytes": 588,
+      "sensitive_values_found": false
+    },
+    {
+      "check": "C26 local operations complete",
+      "status": "PASS",
+      "encrypted_backup_sha256": "f6724934ef680613edc05c85d8cd9623e03f1bd19f59c84bfed3ce33dc54349a",
+      "hosted_checks": "N/A: user confirmed no deployed backend/proxy/APM/backup system",
+      "retained_key": false
+    }
+  ],
+  "run_id": "RUN-20261023-C26-LOCAL-04",
+  "user_scope": "User confirmed no deployed backend/proxy/APM/backup infrastructure; complete local scope only",
+  "retention_evidence": "local-technical-acceptance-20261023.json",
+  "hosted_status": "NOT RUN; no hosted infrastructure",
+  "cleanup": "Only disposable test containers/networks/volumes removed; no primary service changes"
+}

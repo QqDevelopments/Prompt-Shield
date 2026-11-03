@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "scope": "Local functional and automated acceptance of shared protection capacity, progress and public IP switches",
+  "status": "passed",
+  "revisions": {
+    "community_base": "6bce6b56398d87b019e444f7784b9b5705403ffc",
+    "enterprise_base": "6e7974be8a7a15c2f40adcce89ef2b38b1e4daca",
+    "includes_uncommitted_working_tree_changes": true,
+    "committed_or_deployed_by_agent": false
+  },
+  "environment": {
+    "platform": "Windows, amd64, loopback only",
+    "node": "24.12.0",
+    "go": "1.27.0",
+    "rust": "1.99.1",
+    "docker_server": "29.9.2",
+    "engine": "Real rules-only Rust gRPC services; NER disabled",
+    "provider": "Controlled local HTTP provider; no real provider account or API key",
+    "dependencies": "Real isolated PostgreSQL, Redis, Keycloak and Mailpit pilot fixtures",
+    "core_count": 2,
+    "community_gateway_processes": 3,
+    "shared_core_replica_ports": [18081, 18086],
+    "independent_core_port": 18082,
+    "pilot_queue_settings": {
+      "QUEUE_MAX_RUNNING": 1,
+      "QUEUE_MAX_WAITING": 20,
+      "QUEUE_WAIT_TIMEOUT_SECONDS": 30,
+      "PUBLIC_DAILY_IP_LIMIT_ENABLED": true,
+      "PUBLIC_IP_RATE_LIMIT_ENABLED": false,
+      "ENVIRONMENT": "development"
+    },
+    "replica_scope": "The extra gateway shares the real Redis queue and Rust engine; local application/operator metadata is ephemeral per gateway, so this is not acceptance of production load-balanced identity storage."
+  },
+  "shared_frontend_package": {
+    "version": "0.1.2",
+    "archive": "qqdevelopments-prompt-shield-web-core-0.1.2.tgz",
+    "sha256": "b2f5df5f342bf1ab9cdb794546e37cbe34ef6346f0fc3b39d5508642fb6cdfab",
+    "integrity": "sha512-ltpTxYkHS/szUqLe88xouy+sYUsjf3mQNcv/A8EjTnR+T42scvifuyFYv/pDgbiXaF2laCsZrZEjEKqshrJYbQ==",
+    "identical_in_both_frontends": true,
+    "shared_update_and_freshness_checks": "passed",
+    "credential_formats_preserved": true
+  },
+  "verification": {
+    "community_go": {
+      "command": "go test -race -count=1 -json ./...; go vet ./...",
+      "real_engine_and_sdk_environment_provided": true,
+      "sdk_versions": {"openai": "2.45.0", "anthropic": "1.4.0"},
+      "top_level_passed": 68,
+      "subtests_passed": 92,
+      "skipped": [],
+      "all_eight_required_integration_boundaries_passed": true
+    },
+    "enterprise_go": {
+      "command": "go test -race -count=1 -json ./...; go vet ./...",
+      "real_postgresql_and_redis": true,
+      "top_level_passed": 56,
+      "subtests_passed": 39,
+      "skipped": ["TestLiveApplicationDomainProof", "TestSMTPAcceptance"],
+      "skip_reason": "External opt-in checks are outside this queue change and were not counted as passes."
+    },
+    "community_frontend": {
+      "npm_ci": "passed",
+      "typescript_and_test_typecheck": "passed",
+      "native_script_tests_passed": 12,
+      "vitest_tests_passed": 12,
+      "build": "passed",
+      "eslint_and_prettier": "passed",
+      "chromium_passed": 13,
+      "chromium_skipped": 0
+    },
+    "enterprise_frontend": {
+      "npm_ci": "passed",
+      "typescript_and_test_typecheck": "passed",
+      "native_script_tests_passed": 3,
+      "vitest_tests_passed": 12,
+      "build": "passed",
+      "chromium_passed": 42,
+      "chromium_skipped": 0,
+      "real_live_local_subset_passed": 17
+    },
+    "shared_core": "Native functional tests, type checks, package build/update, immutable version conflicts, rollback and both consumer integrity checks passed.",
+    "compose_configuration": "Both backend Compose configurations validated without printing secrets."
+  },
+  "observed_contracts": [
+    "Separate gateway processes share real Redis FIFO: positions 1 and 2 update after cancellation, and the next job acquires the single configured slot.",
+    "Concurrent real Redis admissions enforce combined running and waiting limits; independent core namespaces remain available.",
+    "Community inspection, protected chat and authenticated embeddings share protection capacity; expired/cancelled waiters do not later dispatch.",
+    "Both real frontends display server queue position and processing over the original POST, cancel queued work and complete a fresh restored reply.",
+    "Unauthorized, role/model/tenant/quota denied and security-blocked requests do not reach a provider.",
+    "All three providers retain JSON and native SSE restoration, including repeated/split placeholders, cancellation and next-request recovery.",
+    "Full queue, wait timeout, processing deadline, lost Pub/Sub notification, owner expiry and shutdown during admission fail safely.",
+    "Stopping the owned Redis container rejects new protection work with 503 queue_unavailable and terminates queued/running work without dispatching the waiter. After all in-flight work drains, restarting Redis permits a fresh restored reply.",
+    "The fault run exposed stale lease cleanup after an unavailable Redis removal. Bounded opaque cleanup tickets and batched reconciliation corrected the recovery delay; the repeated real outage test passed.",
+    "Daily/minute-IP switch combinations, development daily exemption and preserved public global/core capacity were verified.",
+    "Split UTF-8/CRLF, malformed/oversized/truncated progress, aborts, ordinary JSON fallback and stream=true incompatibility were checked."
+  ],
+  "acceptance_limits": [
+    "No hosted ingress, production sizing, buffering/timeouts or cost measurement was performed.",
+    "Installed Chrome/Edge manual acceptance was not rerun for this feature. New C29/E41 rows remain NOT RUN; earlier manual rows keep their recorded scope.",
+    "Real provider credentials, external SMTP/domain tests and long NER quality/performance runs were outside this work.",
+    "CI's required-boundary list was extended to eight; this local run did not execute the model-download/standalone CI bootstrap or publish a CI run.",
+    "A dead gateway still relies on bounded Redis leases; Redis state loss requires verified drain or the documented quiescence horizon."
+  ],
+  "cleanup": {
+    "completed": true,
+    "native_processes": "Owned pilot process tree and Playwright web servers stopped; owned gateway, engine, provider and frontend ports verified closed.",
+    "docker": "The four pilot containers were returned to their initial stopped state; no Docker containers remain running.",
+    "preserved": "Existing database volumes, private fixture files, user provider credentials and browser sessions were preserved. No Git staging, commit, push or deployment was performed."
+  }
+}

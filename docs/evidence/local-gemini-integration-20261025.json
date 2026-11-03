@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "run_id": "RUN-20261025-GEMINI-LOCAL-01",
+  "date": "2026-10-25",
+  "authorization": "User-approved Gemini integration for Community and Enterprise",
+  "scope": "Google AI Studio credentials through the OpenAI-compatible text chat API; JSON and SSE responses",
+  "source": {
+    "state": "Uncommitted working-tree changes on the recorded base revisions",
+    "community_base_revision": "7fea45652b36e0c3a4da2a335fa7e10b418ae134",
+    "enterprise_base_revision": "20a9db60ec4e177bad264c98e5a275f7036fe8f0",
+    "fingerprint_algorithm": "SHA-256 of newline-joined sorted path + NUL + SHA-256(file bytes) entries for changed production Go and frontend src TS/TSX/JSON files, excluding test files",
+    "community_production_fingerprint": "934843ea2bd265bd33bb8b936ad4dffcd302d43bd038f58414c1c9c8c3273acc",
+    "enterprise_production_fingerprint": "39d7e8f8a8fe00f66e50ebbdb6b4d2ed04dffa127546a937718ea0bcd40df3ef"
+  },
+  "community_gateway": {
+    "status": "PASS",
+    "command": "go test -race ./internal/api ./cmd/gateway ./internal/store ./internal/ratelimit -count=1 -v",
+    "working_directory": "prompt-shield/services/gateway",
+    "dependencies": "Disposable PostgreSQL 17 and Redis 7, actual rules-only Rust engine, pinned Python provider SDKs, controlled HTTP providers",
+    "required_dependency_tests_skipped": 0,
+    "verified_boundaries": [
+      "Public and application-key Gemini routes reach the configured Gemini chat endpoint with a distinct Bearer provider credential",
+      "Hosted configuration requires official provider endpoints and request-scoped provider keys; optional server keys remain available for self-hosted use",
+      "Gemini discovery, invalid API_KEY_INVALID credentials, permission/quota errors, empty model lists and malformed or empty chat responses",
+      "Gemini max_completion_tokens conversion to max_tokens, conflicting fields, bounds and quota reservations",
+      "JSON and SSE masking/restoration of repeated and split placeholders, explicit stream completion, cancellation and fresh-request recovery",
+      "Blocked or failed inspections cause zero provider dispatch; audit metadata excludes tested originals and credentials",
+      "OpenAI chat/stream/embeddings, Gemini chat/stream and Anthropic messages/stream through pinned SDK clients"
+    ],
+    "subsequent_checks": [
+      {
+        "command": "go test -race ./internal/api -count=1",
+        "status": "PASS",
+        "scope": "API suite after adding the empty Gemini model-list case, with real dependency and SDK settings"
+      },
+      {
+        "command": "go test -race ./internal/api ./cmd/gateway -run Gemini -count=1",
+        "status": "PASS",
+        "scope": "Final Gemini HTTP/configuration checks after retaining failed audit outcomes for invalid Gemini responses"
+      }
+    ]
+  },
+  "enterprise_gateway": {
+    "status": "PASS",
+    "command": "go test -race ./... -count=1",
+    "working_directory": "prompt-shield-enterprise/apps/enterprise-gateway",
+    "dependencies": "Disposable PostgreSQL 17 and Redis 7; controlled tenant core HTTP server",
+    "verified_boundaries": [
+      "Browser and application-key Gemini routes forward to the organization's configured protection core",
+      "Provider credentials remain separate from backend application credentials",
+      "Organization context, role, organization/department model permission and quota rejections occur before core dispatch",
+      "Event metadata excludes tested prompts and credentials"
+    ]
+  },
+  "frontends": {
+    "community": {
+      "status": "PASS",
+      "commands": [
+        "npm test",
+        "npm run typecheck:test",
+        "npm run lint",
+        "npm run build",
+        "npm run test:e2e -- --project=chromium e2e/models.spec.ts e2e/public.spec.ts"
+      ],
+      "native_node_tests": 6,
+      "vitest_files": 4,
+      "vitest_tests": 11,
+      "chromium_scenarios": 8,
+      "browser_boundary": "Local rules engine/gateway for inspection; discovery/chat HTTP routes controlled by Playwright",
+      "verified_behavior": "Three-provider credentials, discovery and Gemini manual model selection, correct chat path, reload and provider-switch cleanup"
+    },
+    "enterprise": {
+      "status": "PASS",
+      "commands": [
+        "npm test",
+        "npm run typecheck:test",
+        "npm run build",
+        "npm run test:e2e -- --project=chromium e2e/session.spec.ts"
+      ],
+      "native_node_tests": 3,
+      "vitest_files": 4,
+      "vitest_tests": 10,
+      "chromium_scenarios": 7,
+      "browser_boundary": "Session and chat HTTP routes controlled by Playwright; storage-backed gateway behavior verified separately",
+      "verified_behavior": "Three-provider chat, credential reload, organization isolation and provider-switch cleanup"
+    }
+  },
+  "local_kit": {
+    "status": "PASS",
+    "actual_provider_process": true,
+    "checks": [
+      "OpenAI and Anthropic discovery, including Anthropic query parameters",
+      "Gemini fixture model discovery and structured invalid-key response",
+      "Gemini JSON/SSE response shape and indexed content chunks",
+      "Gemini request counters without raw email exposure"
+    ],
+    "gemini_requests": 2,
+    "raw_email_exposure": 0,
+    "compose_base_config": "PASS",
+    "compose_hosted_overlay_config": "PASS",
+    "typescript_script_typecheck": "PASS"
+  },
+  "acceptance_boundaries": {
+    "real_google_provider": "NOT RUN: no Gemini key was present in the process or either repository's local .env",
+    "hosted_deployment": "NOT RUN",
+    "manual_chrome_edge": "NOT RUN; automated Chromium runs do not expand the manual matrix",
+    "matrix_rows": ["C28", "E40"],
+    "manual_guides": "Pending Gemini scenarios added; existing acceptance records retained",
+    "localization": "One Community English hint queued in pending-localization-keys.json; other locales unchanged",
+    "rust_quality_and_sustained_load": "NOT RERUN: Rust/NER sources and model weights unchanged",
+    "excluded_features": ["Vertex AI", "Native Gemini API", "Images/audio", "Tool calls", "Gemini embeddings"]
+  },
+  "cleanup": {
+    "owned_test_containers_removed": true,
+    "owned_provider_process_terminated": true,
+    "checked_loopback_ports": [15051, 18080, 18090, 18092, 19051, 15435, 16382],
+    "remaining_listeners_on_checked_ports": 0,
+    "commits_staging_pushes_or_branch_changes": false
+  },
+  "data_handling": "This record contains metadata only; no provider keys, raw prompts or restoration mappings are retained"
+}

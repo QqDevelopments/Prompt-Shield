@@ -1,0 +1,4 @@
+services:
+  engine:
+    ports: ["127.0.0.1:15052:50051"]
+    networks: [services, egress]

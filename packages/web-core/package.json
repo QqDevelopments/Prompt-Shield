@@ -1,0 +1,31 @@
+{
+  "name": "@qqdevelopments/prompt-shield-web-core",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./distribution": {
+      "types": "./dist/distribution.d.ts",
+      "default": "./dist/distribution.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typecheck:test": "tsc -p tsconfig.test.json --noEmit",
+    "test": "npm run typecheck:test && node --no-warnings --experimental-strip-types --test tests/web-core.test.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}

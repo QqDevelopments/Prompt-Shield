@@ -1,0 +1,41 @@
+{
+  "run_id": "shared-frontend-package-20261029",
+  "date": "2026-10-29",
+  "community_base_revision": "b0cffaa72f3984fd70b66685d261290a38a18a11",
+  "enterprise_base_revision": "425763897ecc0638b469b03bb48e325b6b04d389",
+  "package": "@qqdevelopments/prompt-shield-web-core",
+  "version": "0.1.0",
+  "archive_sha256": "ab1b278464d2f4147cecfdb993a20bba39d8741b8ea283eca2133d22508dabfe",
+  "consumer_archives_identical": true,
+  "runtime_dependencies": 0,
+  "scope": "Shared browser provider identifiers, credential lifecycle, public language routes and locale/theme normalization. Product storage formats, organization binding, UI, translations and backend APIs retained.",
+  "verification": {
+    "shared_package_native_tests": 6,
+    "shared_package_typecheck_and_build": "PASS",
+    "helper_behavior_tests": 6,
+    "helper_cases": ["two-consumer update", "idempotency", "invalid target before production", "same-version conflict", "rollback after second consumer failure", "isolated source check", "stale lock rejection", "new-version metadata and old archive retention"],
+    "community_native_tests_including_helper": 12,
+    "community_vitest_tests": 12,
+    "enterprise_native_tests": 3,
+    "enterprise_vitest_tests": 12,
+    "both_frontend_types_and_builds": "PASS",
+    "community_lint_and_format": "PASS",
+    "source_freshness_check": "PASS",
+    "consumer_archive_and_lock_checks": "PASS",
+    "community_chromium_scenarios": 9,
+    "enterprise_chromium_scenarios": 9,
+    "browser_scope": "Existing controlled discovery/session routes and local Community rules engine; Enterprise uses controlled session/API routes. Includes late discovery cancellation, pending reply after Forget, provider/org changes, reload, appearance and language entry.",
+    "independent_frontend_copies": "Both passed npm ci, application/test typechecks, npm test, build and consumer archive checks without a sibling checkout.",
+    "new_browser_test_corrections": "Initial Enterprise test used the Community input label and expected an accessible log after Forget. Corrected to the actual Enterprise label and absent-message assertion; final nine scenarios passed.",
+    "backend_or_ner_suites": "Not repeated; no backend/model implementation changed.",
+    "real_provider_calls": 0
+  },
+  "delivery": {
+    "registry_publication": false,
+    "tracked_archive_and_lockfiles_in_each_repository": true,
+    "ci": "Source freshness in Community; pinned archive/lock verification in Enterprise; no automatic updates.",
+    "hosted_acceptance": "Not established; manual matrix statuses unchanged.",
+    "owned_test_ports_closed": true,
+    "git_staging_commits_pushes": false
+  }
+}

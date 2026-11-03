@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "rust-lang.rust-analyzer",
+    "golang.go",
+    "bufbuild.vscode-buf",
+    "tamasfe.even-better-toml",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml",
+    "vadimcn.vscode-lldb"
+  ]
+}

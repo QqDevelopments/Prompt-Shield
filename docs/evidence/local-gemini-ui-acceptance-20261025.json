@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "run_id": "RUN-20261025-GEMINI-UI-02",
+  "date": "2026-10-25",
+  "authorization": "User delegated the pending Gemini scenarios to Codex",
+  "status": "PASS for the controlled local provider branches of C28 and E40",
+  "source": {
+    "state": "Same uncommitted production sources as the preceding integration run; this run changes acceptance documentation only",
+    "previous_record": "local-gemini-integration-20261025.json",
+    "community_base_revision": "7fea45652b36e0c3a4da2a335fa7e10b418ae134",
+    "enterprise_base_revision": "20a9db60ec4e177bad264c98e5a275f7036fe8f0",
+    "community_production_fingerprint": "934843ea2bd265bd33bb8b936ad4dffcd302d43bd038f58414c1c9c8c3273acc",
+    "enterprise_production_fingerprint": "39d7e8f8a8fe00f66e50ebbdb6b4d2ed04dffa127546a937718ea0bcd40df3ef"
+  },
+  "environment": {
+    "os": "Windows",
+    "browser_control": "Playwright CLI, installed chrome and msedge channels, isolated headless sessions",
+    "chrome_user_agent_version": "HeadlessChrome/156.0.0.0",
+    "edge_user_agent_version": "HeadlessChrome/156.0.0.0 Edg/156.0.0.0",
+    "community": "Actual production frontend build and Go gateway with the real rules-only Rust engine",
+    "enterprise": "Actual Vite frontend, Go gateway, local Keycloak OIDC, PostgreSQL 17, Redis 7 and two independently keyed tenant cores",
+    "provider": "Test-owned local-provider.ts process; Gemini fixture model",
+    "http_route_mocks": false,
+    "ner_enabled": false
+  },
+  "community_c28": {
+    "chrome": "PASS",
+    "edge": "PASS",
+    "observations": [
+      "Google Gemini discovery returned the fixture model with Select a model still selected",
+      "Selecting the fixture and sending P11 produced a visible assistant response with the original synthetic email restored",
+      "P07 displayed the security block and did not cause provider dispatch",
+      "P02 inspection displayed Masked, Email and one detection while preserving surrounding text",
+      "Refresh and same-tab reload returned the Gemini list and preserved the credential; conversation was cleared and model selection remained explicit",
+      "Switching to OpenAI in Chrome or Anthropic in Edge cleared the credential and model; returning to Gemini did not recover them",
+      "After re-entering a fixture key, Forget and reload left an empty credential input and no reusable provider session"
+    ]
+  },
+  "enterprise_e40": {
+    "chrome": "PASS for organization administrator in A and organization-switch cleanup between A/B",
+    "edge": "PASS for department user in A/research; separate real auditor session",
+    "observations": [
+      "Actual local Keycloak login established each role's Enterprise session",
+      "Organization administrator and department user selected Google Gemini and sent P11 through the configured tenant core; the visible response restored the synthetic email",
+      "P07 returned HTTP 400 prompt_shield_blocked and an unapproved model returned HTTP 403 model_denied; neither caused provider dispatch",
+      "After successful chat, same-tab reload preserved Gemini and its credential while clearing model/message inputs and conversation",
+      "The existing 403 security path intentionally forgot the provider credential; successful-chat reload was verified separately",
+      "Switching A to B cleared credentials and conversation; switching the Edge provider to Anthropic cleared credentials, model and conversation",
+      "Forget followed by reload left no reusable credential",
+      "The auditor saw no Protected chat entry; direct /workspace/chat navigation redirected to /workspace/overview",
+      "Sign out plus Keycloak Logout confirmation completed identity logout; reopening protected chat returned the public entry screen",
+      "Both chat browser sessions had no provider credential in session storage after logout and /api/session returned HTTP 401"
+    ]
+  },
+  "provider_observations": {
+    "successful_chat_requests": 8,
+    "gemini_requests": 8,
+    "requests_with_placeholders": 8,
+    "requests_exposing_the_synthetic_email": 0,
+    "expected_distribution": "Two Community chats and six Enterprise chats",
+    "blocked_and_denied_requests": "Four P07 blocks and two Enterprise model rejections; no additional chat dispatch"
+  },
+  "verification": {
+    "community_frontend_rebuild": "PASS",
+    "real_service_readiness": "PASS",
+    "product_failures_observed_in_exercised_steps": 0,
+    "production_source_changes_in_this_run": false,
+    "previous_automated_checks": "Not repeated: the preceding integration record retains the JSON/SSE, cancellation, SDK, quota and Go race evidence"
+  },
+  "remaining_acceptance": {
+    "real_google_provider": "NOT RUN: no Gemini API key was available in the process or either repository's local .env",
+    "hosted_deployment": "NOT RUN",
+    "external_customer_identity": "NOT RUN; only the local Keycloak fixture was used",
+    "scope_limit": "This agent-executed local UI run does not accept unrelated manual matrix rows or expand earlier provider/NER acceptance"
+  },
+  "cleanup": {
+    "provider_credentials_forgotten": true,
+    "enterprise_users_signed_out_including_identity_confirmation": true,
+    "three_owned_browser_sessions_closed": true,
+    "coordinator_native_children_stopped": true,
+    "pilot_compose_services_stopped": true,
+    "existing_fixture_volumes_preserved": true,
+    "checked_loopback_ports": [15061, 15062, 18081, 18082, 18090, 8090, 5180, 54329, 63799, 8081, 1025, 8025],
+    "remaining_listeners_on_checked_ports": 0,
+    "commits_staging_pushes_or_branch_changes": false
+  },
+  "data_handling": "Metadata-only acceptance record; no credentials, raw prompt bodies or restoration mappings"
+}

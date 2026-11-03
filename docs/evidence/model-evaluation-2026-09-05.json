@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-05",
+  "evaluated": 2000,
+  "rejected_ids": [],
+  "passed": false,
+  "failures": [
+    "existing: overall f1",
+    "existing: overall recall",
+    "existing: ORGANIZATION recall",
+    "candidate: overall f1",
+    "candidate: overall recall",
+    "candidate: ORGANIZATION recall",
+    "candidate: LOCATION recall"
+  ],
+  "scores": {
+    "fp32": {
+      "PERSON": {
+        "precision": 0.38743136058572303,
+        "recall": 0.5725879170423805,
+        "f1": 0.46215429403202335,
+        "gold": 1109,
+        "matched": 635,
+        "predicted": 1639
+      },
+      "ORGANIZATION": {
+        "precision": 0.46051660516605164,
+        "recall": 0.6354378818737271,
+        "f1": 0.5340179717586649,
+        "gold": 982,
+        "matched": 624,
+        "predicted": 1355
+      },
+      "LOCATION": {
+        "precision": 0.5711965349214944,
+        "recall": 0.6913499344692006,
+        "f1": 0.6255558849688705,
+        "gold": 1526,
+        "matched": 1055,
+        "predicted": 1847
+      },
+      "overall": {
+        "precision": 0.47800041313778147,
+        "recall": 0.6397567044512027,
+        "f1": 0.5471742728777489,
+        "gold": 3617,
+        "predicted": 4841,
+        "matched": 2314
+      }
+    },
+    "existing": {
+      "PERSON": {
+        "precision": 0.3719951923076923,
+        "recall": 0.5581605049594229,
+        "f1": 0.4464478903714389,
+        "gold": 1109,
+        "matched": 619,
+        "predicted": 1664
+      },
+      "ORGANIZATION": {
+        "precision": 0.43854545454545457,
+        "recall": 0.6140529531568228,
+        "f1": 0.5116673737802291,
+        "gold": 982,
+        "matched": 603,
+        "predicted": 1375
+      },
+      "LOCATION": {
+        "precision": 0.5423280423280423,
+        "recall": 0.6716906946264745,
+        "f1": 0.6001170960187354,
+        "gold": 1526,
+        "matched": 1025,
+        "predicted": 1890
+      },
+      "overall": {
+        "precision": 0.45587340231284235,
+        "recall": 0.6212330660768592,
+        "f1": 0.5258600514860754,
+        "gold": 3617,
+        "predicted": 4929,
+        "matched": 2247
+      }
+    },
+    "candidate": {
+      "PERSON": {
+        "precision": 0.3767584097859327,
+        "recall": 0.5554553651938684,
+        "f1": 0.4489795918367347,
+        "gold": 1109,
+        "matched": 616,
+        "predicted": 1635
+      },
+      "ORGANIZATION": {
+        "precision": 0.4362709395484341,
+        "recall": 0.609979633401222,
+        "f1": 0.5087048832271762,
+        "gold": 982,
+        "matched": 599,
+        "predicted": 1373
+      },
+      "LOCATION": {
+        "precision": 0.5324947589098532,
+        "recall": 0.6657929226736566,
+        "f1": 0.5917297612114153,
+        "gold": 1526,
+        "matched": 1016,
+        "predicted": 1908
+      },
+      "overall": {
+        "precision": 0.45382424735557364,
+        "recall": 0.6168095106441802,
+        "f1": 0.522911051212938,
+        "gold": 3617,
+        "predicted": 4916,
+        "matched": 2231
+      }
+    },
+    "candidate-repeat": {
+      "PERSON": {
+        "precision": 0.3767584097859327,
+        "recall": 0.5554553651938684,
+        "f1": 0.4489795918367347,
+        "gold": 1109,
+        "matched": 616,
+        "predicted": 1635
+      },
+      "ORGANIZATION": {
+        "precision": 0.4362709395484341,
+        "recall": 0.609979633401222,
+        "f1": 0.5087048832271762,
+        "gold": 982,
+        "matched": 599,
+        "predicted": 1373
+      },
+      "LOCATION": {
+        "precision": 0.5324947589098532,
+        "recall": 0.6657929226736566,
+        "f1": 0.5917297612114153,
+        "gold": 1526,
+        "matched": 1016,
+        "predicted": 1908
+      },
+      "overall": {
+        "precision": 0.45382424735557364,
+        "recall": 0.6168095106441802,
+        "f1": 0.522911051212938,
+        "gold": 3617,
+        "predicted": 4916,
+        "matched": 2231
+      }
+    }
+  },
+  "artifacts": {
+    "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+    "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+    "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+    "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+  },
+  "corpus_sha256": "ab42cb89425c4a874323de9a49322fd1e36734c81daa4e3129ffc07d5141d3ee",
+  "dataset_revision": "205f3e9c9f3577ea2561d43f2f62dc249ab92d5b",
+  "environment": {
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "logical_cpus": 16,
+    "commit": "6d59b32b819960106679d6f6211d77fb65e49031",
+    "tracked_diff_sha256": "f17ecdeb430a6deebf11690cabf486ecfb271b9cc6c9b57ea99f6dd1b751303b",
+    "packages": {
+      "onnx": "1.22.0",
+      "onnxruntime": "1.29.0",
+      "pyarrow": "25.0.1",
+      "numpy": "2.5.2"
+    }
+  }
+}

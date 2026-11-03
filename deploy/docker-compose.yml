@@ -1,0 +1,99 @@
+name: prompt-shield
+services:
+  gateway:
+    build:
+      context: ..
+      dockerfile: services/gateway/Dockerfile
+      target: backend
+    restart: unless-stopped
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://127.0.0.1:5173}
+      DEPLOYMENT_MODE: ${DEPLOYMENT_MODE:-self-hosted}
+      PUBLIC_ENABLED: ${PUBLIC_ENABLED:-false}
+      PUBLIC_HMAC_KEY: ${PUBLIC_HMAC_KEY:-}
+      PUBLIC_DAILY_IP_LIMIT_ENABLED: ${PUBLIC_DAILY_IP_LIMIT_ENABLED:-true}
+      PUBLIC_IP_RATE_LIMIT_ENABLED: ${PUBLIC_IP_RATE_LIMIT_ENABLED:-true}
+      QUEUE_MAX_RUNNING: ${QUEUE_MAX_RUNNING:-2}
+      QUEUE_MAX_WAITING: ${QUEUE_MAX_WAITING:-20}
+      QUEUE_WAIT_TIMEOUT_SECONDS: ${QUEUE_WAIT_TIMEOUT_SECONDS:-30}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
+      TRUSTED_PROXY_CIDRS: ${TRUSTED_PROXY_CIDRS:-}
+      PUBLIC_REQUESTS_PER_MINUTE: ${PUBLIC_REQUESTS_PER_MINUTE:-10}
+      PUBLIC_CONCURRENT_PER_IP: ${PUBLIC_CONCURRENT_PER_IP:-2}
+      PUBLIC_CONCURRENT_GLOBAL: ${PUBLIC_CONCURRENT_GLOBAL:-20}
+      OPERATOR_PASSWORD: ${OPERATOR_PASSWORD:?Set OPERATOR_PASSWORD}
+      ENGINE_TOKEN: ${ENGINE_TOKEN:?Set ENGINE_TOKEN}
+      RUST_ENGINE_ADDR: engine:50051
+      DATABASE_URL: postgres://promptshield:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/promptshield?sslmode=disable
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_BASE_URL: ${GEMINI_BASE_URL:-https://generativelanguage.googleapis.com/v1beta/openai}
+      ORGANIZATION_ID: ${ORGANIZATION_ID:-community}
+      METRICS_TOKEN: ${METRICS_TOKEN:-}
+      DAILY_TOKEN_BUDGET: ${DAILY_TOKEN_BUDGET:-1000000}
+      AUDIT_RETENTION_DAYS: ${AUDIT_RETENTION_DAYS:-30}
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      engine: {condition: service_started}
+    read_only: true
+    healthcheck:
+      test: [CMD, /gateway, -healthcheck]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 12
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [services, egress]
+  engine:
+    build:
+      context: ..
+      dockerfile: services/engine/Dockerfile
+    restart: unless-stopped
+    environment:
+      ENGINE_TOKEN: ${ENGINE_TOKEN:?Set ENGINE_TOKEN}
+      NER_ENABLED: ${NER_ENABLED:-false}
+      NER_SESSION_COUNT: ${NER_SESSION_COUNT:-1}
+      NER_INTRA_THREADS: ${NER_INTRA_THREADS:-4}
+      NER_SPINNING: ${NER_SPINNING:-true}
+      ONNX_MODEL_PATH: /models/general-ner/model.onnx
+      TOKENIZER_CONFIG_PATH: /models/general-ner/tokenizer.json
+    volumes: ["../models:/models:ro"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [services]
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: promptshield
+      POSTGRES_USER: promptshield
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U promptshield -d promptshield"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [services]
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: [redis-server, --maxmemory, 128mb, --maxmemory-policy, noeviction]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [services]
+networks:
+  services: {internal: true}
+  egress: {}
+volumes:
+  postgres-data: {}

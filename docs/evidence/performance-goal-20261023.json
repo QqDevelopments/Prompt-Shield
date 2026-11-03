@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "decided_by": "user",
+  "p99_target_ms": 50,
+  "comparison": "strictly below",
+  "required_for_release": false,
+  "required_for_acceptance": false,
+  "required_for_model_or_default_promotion": false,
+  "previous_target_ms": 6,
+  "reference_scope": {
+    "boundary": "Real gRPC contextual NER inspection",
+    "max_tokenizer_tokens_including_special_tokens": 32,
+    "concurrent_requests": 4,
+    "warmup_seconds": 30,
+    "measurement_seconds": 120,
+    "independent_repetitions": 3,
+    "minimum_requests_per_repetition": 10000,
+    "engine_cpu_quota": 8,
+    "engine_memory_limit_mib": 1024,
+    "long_input_cancellation_and_soak_have_separate_results": true
+  },
+  "assessment": {
+    "evidence": "local-model-performance-acceptance-20261023.json",
+    "run_id": "RUN-20261023-C27-LOCAL-05",
+    "all_three_recorded_baseline_p99_values_below_current_goal": true,
+    "rounded_p99_ms_range": [40.4, 49.3],
+    "new_benchmark_run": false,
+    "historical_measurements_and_original_gate_fields_rewritten": false,
+    "production_configuration_changed": false
+  },
+  "required_checks_retained": [
+    "Detection and masking quality",
+    "Unexpected-error handling and safe blocking",
+    "Cancellation, drainage and recovery",
+    "Memory/resource limits and complete reference evidence"
+  ],
+  "scope_note": "The goal applies to the documented short-input workload. Existing local observations do not establish latency for longer inputs, hosted deployments or other hardware."
+}

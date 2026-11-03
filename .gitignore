@@ -1,0 +1,56 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+*.exe
+*.dll
+*.bin
+*.o
+*.dylib
+*.so
+
+# AI assistant configurations
+.agent
+.cursor
+.claude
+.gemini
+
+# Secrets / credentials
+.env*
+!.env.example
+
+# Runtime log files
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.tsbuildinfo
+
+# Rust
+target/
+
+# Go
+vendor/
+!apps/web-console/vendor/
+apps/web-console/vendor/*
+!apps/web-console/vendor/qqdevelopments-prompt-shield-web-core-*.tgz
+!apps/web-console/vendor/shared-core.json
+
+# Downloaded model artifacts and local verification outputs
+models/general-ner/
+output/
+playwright-report/
+test-results/
+__pycache__/
+*.pyc

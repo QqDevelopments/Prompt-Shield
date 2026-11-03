@@ -1,0 +1,47 @@
+syntax = "proto3";
+package promptshield.v1;
+option go_package = "github.com/qqdevelopments/prompt-shield/services/gateway/gen/shieldv1";
+
+service SecurityEngine {
+  rpc InspectAndSanitize(SanitizeRequest) returns (SanitizeResponse);
+  rpc DeAnonymize(DeAnonymizeRequest) returns (DeAnonymizeResponse);
+}
+
+message SecurityPolicy {
+  bool mask_pii = 1;
+  bool block_secrets = 2;
+  repeated string blocked_keywords = 3;
+  bool contextual_pii = 4;
+}
+message SanitizeRequest {
+  string request_id = 1;
+  string organization_id = 2;
+  string text = 3;
+  SecurityPolicy policy = 4;
+}
+// Internal only. Never serialize this message to audit or public responses.
+message Mapping {
+  string placeholder = 1;
+  string original = 2;
+  string entity_type = 3;
+  uint32 start_byte = 4;
+  uint32 end_byte = 5;
+  // Authentication tag binding the mapping to the originating request and organization.
+  bytes proof = 6;
+}
+message SanitizeResponse {
+  string sanitized_text = 1;
+  bool is_blocked = 2;
+  string reason_code = 3;
+  repeated Mapping mappings = 4;
+  repeated string entity_types = 5;
+  uint32 entity_count = 6;
+  uint64 processing_time_micros = 7;
+}
+message DeAnonymizeRequest {
+  string request_id = 1;
+  string organization_id = 2;
+  string text = 3;
+  repeated Mapping mappings = 4;
+}
+message DeAnonymizeResponse { string text = 1; }

@@ -1,0 +1,16 @@
+{
+ "model": "Xenova/bert-base-NER",
+ "revision": "24c7e5aba9ae350923357a6f0b92571be34037ec",
+ "base_model": "dslim/bert-base-NER",
+ "base_model_revision": "d1a3e8f13f8c3566299d95fcfc9a8d2382a9affc",
+ "base_license": "MIT",
+ "language": "en",
+ "max_tokens": 512,
+ "confidence_threshold": 0.5,
+ "span_aggregation": "first_confident_entity_wordpiece_v1",
+ "files": [
+  {"remote":"onnx/model_quantized.onnx","local":"model.onnx","sha256":"caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648"},
+  {"remote":"tokenizer.json","local":"tokenizer.json","sha256":"343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1"},
+  {"remote":"config.json","local":"config.json","sha256":"a73a2eccc921bbdea95a94b49a157d3694b5c2abbae7a6f3000e14404a9c31a8"}
+ ]
+}

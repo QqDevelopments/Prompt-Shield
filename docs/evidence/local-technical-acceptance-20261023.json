@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "run_id": "RUN-20261023-COMMUNITY-TECH-03",
+  "date": "2026-10-23",
+  "revision": "19c9b9090b9ecd5a06ec5b02fcf3e2cdf7e70036",
+  "authorization": "User-delegated local technical acceptance",
+  "process_observations": [
+    {
+      "check": "C10 real repeated-placeholder restoration",
+      "status": "PASS",
+      "sanitized_provider_requests": 1
+    },
+    {
+      "check": "C21 engine unavailable",
+      "status": "PASS",
+      "http_status": 503,
+      "error_code": "inspection_unavailable",
+      "elapsed_seconds": 0.53,
+      "upstream_dispatch_delta": 0
+    },
+    {
+      "check": "C21 engine recovery",
+      "status": "PASS"
+    },
+    {
+      "check": "C21 postgres unavailable",
+      "status": "PASS",
+      "http_status": 401,
+      "error_code": "unauthorized",
+      "elapsed_seconds": 0,
+      "upstream_dispatch_delta": 0
+    },
+    {
+      "check": "C21 postgres recovery",
+      "status": "PASS"
+    },
+    {
+      "check": "C21 redis unavailable",
+      "status": "PASS",
+      "http_status": 503,
+      "error_code": "rate_limit_unavailable",
+      "elapsed_seconds": 5,
+      "upstream_dispatch_delta": 0
+    },
+    {
+      "check": "C21 redis recovery",
+      "status": "PASS"
+    },
+    {
+      "check": "C21 provider disconnect and recovery",
+      "status": "PASS",
+      "failure_status": 502
+    },
+    {
+      "check": "C22 actual persistent gateway restart",
+      "status": "PASS",
+      "old_session_status": 401,
+      "retained_counts": {
+        "policy": {
+          "version": 2,
+          "mask_pii": true,
+          "block_secrets": true,
+          "contextual_pii": false,
+          "blocked_keywords": [
+            "synthetic-persist-block"
+          ]
+        },
+        "keys": 1,
+        "events": 7
+      }
+    },
+    {
+      "check": "C22 actual storage and cache restart",
+      "status": "PASS"
+    },
+    {
+      "check": "C22 actual ephemeral gateway restart",
+      "status": "PASS",
+      "old_key_status": 401,
+      "old_session_status": 401,
+      "key_count": 0
+    },
+    {
+      "check": "C26 real retention command",
+      "status": "PASS",
+      "deleted_events": 1,
+      "command_result": "Removed 1 expired audit events"
+    },
+    {
+      "check": "C26 encrypted backup and separate matching-version restore",
+      "status": "PASS",
+      "encryption": "AES-256-GCM; ephemeral key discarded after this test",
+      "backup_sha256": "1b834ab22997042e168b1d9893f970810609924fdbbe1fd828f2204c02d64e54",
+      "restored_counts": {
+        "policy": {
+          "version": 2,
+          "mask_pii": true,
+          "block_secrets": true,
+          "contextual_pii": false,
+          "blocked_keywords": [
+            "synthetic-persist-block"
+          ]
+        },
+        "keys": 1,
+        "events": 9
+      },
+      "authenticated_request_status": 200
+    },
+    {
+      "check": "C26 gateway-log and audit-metadata redaction",
+      "status": "PASS",
+      "sensitive_synthetic_values_found": false,
+      "scope": "fixture gateway logs and audit rows; excludes proxy/APM and hosted backup access"
+    },
+    {
+      "check": "acceptance finished",
+      "status": "PASS",
+      "provider_dispatches": 9,
+      "provider_privacy_or_header_violations": 0
+    }
+  ],
+  "provider_observations": [
+    {
+      "check": "C16 real /v1/chat/completions JSON",
+      "status": "PASS",
+      "repeated_originals_restored": 2,
+      "provider_header_violations": 0
+    },
+    {
+      "check": "C17 real /v1/chat/completions split-placeholder SSE",
+      "status": "PASS",
+      "explicit_completion": true
+    },
+    {
+      "check": "C16 real /v1/messages JSON",
+      "status": "PASS",
+      "repeated_originals_restored": 2,
+      "provider_header_violations": 0
+    },
+    {
+      "check": "C17 real /v1/messages split-placeholder SSE",
+      "status": "PASS",
+      "explicit_completion": true
+    },
+    {
+      "check": "C17 real abrupt upstream closure",
+      "status": "PASS",
+      "explicit_error": "upstream_stream_failed"
+    },
+    {
+      "check": "C10/C17 actual client disconnect and fresh request",
+      "status": "PASS",
+      "fresh_request_restoration_isolated": true,
+      "provider_socket_close_observed": true
+    },
+    {
+      "check": "C18 real embeddings",
+      "status": "PASS",
+      "vector_unchanged": true
+    },
+    {
+      "check": "C19 multimodal input",
+      "status": "PASS",
+      "http_status": 400,
+      "upstream_dispatch_delta": 0,
+      "safe_error": "unsupported_request"
+    },
+    {
+      "check": "C19 body above one MiB",
+      "status": "PASS",
+      "http_status": 400,
+      "upstream_dispatch_delta": 0,
+      "safe_error": "unsupported_request"
+    },
+    {
+      "check": "C19 output-token conflict",
+      "status": "PASS",
+      "http_status": 400,
+      "upstream_dispatch_delta": 0,
+      "safe_error": "invalid_request"
+    },
+    {
+      "check": "C19 blocked secret",
+      "status": "PASS",
+      "http_status": 400,
+      "upstream_dispatch_delta": 0,
+      "safe_error": "prompt_shield_blocked"
+    },
+    {
+      "check": "C14 required NER removed while policy remains enabled",
+      "status": "PASS",
+      "http_status": 503,
+      "safe_error": "inspection_unavailable",
+      "upstream_dispatch_delta": 0
+    },
+    {
+      "check": "C14 model recovery",
+      "status": "PASS",
+      "baseline_policy_restored": true
+    },
+    {
+      "check": "C14 configured model cannot load",
+      "status": "PASS",
+      "engine_exit_code": 1
+    },
+    {
+      "check": "provider/model process acceptance finished",
+      "status": "PASS",
+      "provider_dispatches": 9,
+      "privacy_or_credential_violations": 0
+    }
+  ],
+  "mandatory_integration": {
+    "schema_version": 1,
+    "exit_code": 0,
+    "required": [
+      "TestPinnedSDKCompatibility",
+      "TestPostgresBoundary",
+      "TestRealEngineHTTPBoundary",
+      "TestRedisAtomicLimit"
+    ],
+    "missing_or_failed": [],
+    "skipped": []
+  },
+  "go_passed_results_including_subtests": 107,
+  "go_passed_top_level_tests": 46,
+  "model_pool_tests": [
+    "labeled_english_fixture_evaluation",
+    "pinned_ner_public_boundary",
+    "unicode_repetition_and_exact_token_boundary",
+    "wordpiece_entities_are_fully_masked_and_restored",
+    "canceled_queue_keeps_rules_available_and_recovers_without_cross_request_data",
+    "configuration_enforces_the_eight_thread_budget"
+  ],
+  "model_pool_result": "6 passed; 0 failed; 0 ignored",
+  "model_sha256": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+  "tokenizer_sha256": "343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1",
+  "exclusions": [
+    "Chrome/Edge UI acceptance; browsers not connected",
+    "Safari on an Apple device; unavailable on this Windows host",
+    "Actual provider accounts/vendor model compatibility",
+    "Hosted HTTPS, ingress admission and deployment-specific backup/access/APM checks",
+    "Cross-version rollback; matching-version restore was exercised",
+    "New corpus-scale quality evaluation, sustained load and P99/capacity acceptance"
+  ],
+  "cleanup": "Temporary containers, networks and acceptance volumes removed; original services preserved",
+  "source_changes": "No production code/configuration/default changes in this follow-up",
+  "warning": "Automated results remain distinct from the actual-process observations; local acceptance does not establish hosted or browser acceptance"
+}

@@ -1,0 +1,8 @@
+**/node_modules
+**/target
+**/.git
+**/dist
+output
+models/general-ner
+.env
+**/*.log

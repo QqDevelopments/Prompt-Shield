@@ -1,0 +1,8 @@
+FROM golang:1.27-bookworm AS build
+WORKDIR /source
+COPY services/gateway services/gateway
+WORKDIR /source/services/gateway
+RUN CGO_ENABLED=0 go build -o /bench ./cmd/bench
+FROM debian:bookworm-slim
+COPY --from=build /bench /bench
+ENTRYPOINT ["/bench"]

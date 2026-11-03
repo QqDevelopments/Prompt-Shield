@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "run_id": "RUN-20261026-GEMINI-GOOGLE-03",
+  "date": "2026-10-26",
+  "timezone": "Europe/Istanbul",
+  "authorization": "User supplied the Gemini key and requested a real-provider test",
+  "status": "PASS for the remaining real Google branches of C28 and E40",
+  "source": {
+    "state": "Same uncommitted production sources as the preceding integration/UI runs; acceptance documentation updated only",
+    "previous_integration_record": "local-gemini-integration-20261025.json",
+    "previous_ui_record": "local-gemini-ui-acceptance-20261025.json",
+    "community_base_revision": "7fea45652b36e0c3a4da2a335fa7e10b418ae134",
+    "enterprise_base_revision": "20a9db60ec4e177bad264c98e5a275f7036fe8f0",
+    "community_production_fingerprint": "934843ea2bd265bd33bb8b936ad4dffcd302d43bd038f58414c1c9c8c3273acc",
+    "enterprise_production_fingerprint": "39d7e8f8a8fe00f66e50ebbdb6b4d2ed04dffa127546a937718ea0bcd40df3ef"
+  },
+  "environment": {
+    "application": "Actual local Community frontend/gateway/rules engine and Enterprise frontend/gateway/tenant core",
+    "identity_and_storage": "Local Keycloak OIDC department-user session, PostgreSQL 17 and Redis 7",
+    "browser": "Installed Chrome channel, isolated headless Playwright CLI session",
+    "provider": "Real Google AI Studio account",
+    "official_endpoint": "https://generativelanguage.googleapis.com/v1beta/openai",
+    "server_side_provider_keys": "Empty; real key supplied only in request headers and the tested browser session",
+    "http_route_mocks": false,
+    "ner_enabled": false
+  },
+  "model_discovery": {
+    "direct_google_http": 200,
+    "community_gateway_http": 200,
+    "model_count": 60,
+    "browser_model_selection": "Explicit selection required; no default Gemini model",
+    "successful_requested_model": "models/gemini-flash-lite-latest"
+  },
+  "model_specific_rejection": {
+    "listed_model": "models/gemini-2.5-flash-lite",
+    "community_gateway_http": 502,
+    "community_safe_error": "upstream_rejected",
+    "direct_google_http": 404,
+    "unprefixed_model_also_returned": 404,
+    "working_alias_direct_google_http": 200,
+    "interpretation": "The listed 2.5 identifier was unavailable in these requests; the discovered latest alias worked with the same key and endpoint. No general claim about model retirement or account-wide compatibility is made"
+  },
+  "community_c28": {
+    "status": "PASS",
+    "json_chat": {
+      "boundary": "Public screen to Community gateway to real Rust rules engine to Google",
+      "http_status": 200,
+      "synthetic_email_restored_in_visible_assistant_reply": true
+    },
+    "sse_chat": {
+      "boundary": "Production public Gemini HTTP endpoint to Google",
+      "http_status": 200,
+      "submitted_output_limit": "max_completion_tokens=128",
+      "content_events": 4,
+      "synthetic_email_restored": true,
+      "placeholder_leaked": false,
+      "explicit_done": true,
+      "error_event": false
+    },
+    "critical_secret": "P07 returned the visible security block",
+    "cleanup": "Forget key, clear conversation and reload left an empty provider-key input"
+  },
+  "enterprise_e40": {
+    "status": "PASS",
+    "role": "user in pilot-a/research",
+    "temporary_model_permissions": "The discovered working model was added to organization and department allowlists for this run, then original lists were restored",
+    "json_chat": {
+      "boundary": "Protected chat UI with real local OIDC session through Enterprise gateway and configured tenant core to Google",
+      "http_status": 200,
+      "synthetic_email_restored_in_visible_assistant_reply": true
+    },
+    "sse_chat": {
+      "boundary": "Authenticated /api/gemini/chat/completions with the same real browser session and temporary provider credential",
+      "http_status": 200,
+      "submitted_output_limit": "max_tokens=128",
+      "content_events": 4,
+      "synthetic_email_restored": true,
+      "placeholder_leaked": false,
+      "explicit_done": true,
+      "error_event": false
+    },
+    "critical_secret_http": 400,
+    "critical_secret_safe_error": "prompt_shield_blocked",
+    "cleanup": "Forget, clear, reload, application logout and identity-provider Logout confirmation completed; protected chat returned the public entry screen"
+  },
+  "privacy_checks": {
+    "service_logs_checked": 5,
+    "provider_key_in_service_logs": false,
+    "tested_synthetic_email_in_service_logs": false,
+    "provider_key_in_browser_artifacts": false,
+    "provider_key_in_enterprise_event_metadata": false,
+    "tested_synthetic_email_in_enterprise_event_metadata": false,
+    "provider_credential_in_browser_session_storage_after_forget": false,
+    "key_material_retained_in_this_record": false
+  },
+  "cleanup": {
+    "owned_browser_session_closed": true,
+    "native_test_processes_stopped": true,
+    "pilot_compose_services_stopped": true,
+    "original_organization_and_department_model_permissions_restored": true,
+    "existing_fixture_volumes_preserved": true,
+    "checked_loopback_ports": [15061, 18081, 18082, 8090, 5180, 54329, 63799, 8081, 1025, 8025],
+    "remaining_listeners_on_checked_ports": 0,
+    "user_supplied_env_file": "Preserved without edits"
+  },
+  "remaining_boundaries": {
+    "hosted_deployment_and_ingress": "NOT RUN",
+    "customer_identity_provider": "NOT RUN",
+    "other_models": "Not accepted by the successful latest-alias requests",
+    "quality_and_sustained_load": "Not repeated; Rust/model sources unchanged",
+    "prior_authorization_and_lifecycle_checks": "Retain their separate automated and local UI evidence scopes"
+  },
+  "data_handling": "Metadata only; no real credentials, raw prompts or restoration mappings retained"
+}

@@ -1,0 +1,1401 @@
+{
+  "schema_version": 1,
+  "run_url": "https://github.com/dQqAn/prompt-shield/actions/runs/34062487943",
+  "commit": "c5daba353a56740663264a2648745a78006c0b1f",
+  "verified_date": "2026-09-07",
+  "jobs_total": 8,
+  "jobs_successful": 8,
+  "workflow_elapsed_seconds": 1776.0,
+  "previous_run": {
+    "id": 34046905126,
+    "commit": "0286837f55f4c9b9475c78605826515ab2d36fbf",
+    "elapsed_seconds": 1712.0
+  },
+  "jobs": [
+    {
+      "name": "Prepare selected Linux runner",
+      "conclusion": "success",
+      "duration_seconds": 26.0,
+      "previous_duration_seconds": 29.0
+    },
+    {
+      "name": "Benchmark clock and report behavior (ubuntu-24.04)",
+      "conclusion": "success",
+      "duration_seconds": 24.0,
+      "previous_duration_seconds": 21.0
+    },
+    {
+      "name": "Benchmark clock and report behavior (windows-latest)",
+      "conclusion": "success",
+      "duration_seconds": 67.0,
+      "previous_duration_seconds": 59.0
+    },
+    {
+      "name": "Static, functional and frontend gates",
+      "conclusion": "success",
+      "duration_seconds": 226.0,
+      "previous_duration_seconds": 217.0
+    },
+    {
+      "name": "Real dependencies, NER, SDKs and microbenchmarks",
+      "conclusion": "success",
+      "duration_seconds": 311.0,
+      "previous_duration_seconds": 269.0
+    },
+    {
+      "name": "Reproducible INT8 and accuracy acceptance",
+      "conclusion": "success",
+      "duration_seconds": 307.0,
+      "previous_duration_seconds": 321.0
+    },
+    {
+      "name": "Load, cancellation and resource evidence",
+      "conclusion": "success",
+      "duration_seconds": 604.0,
+      "previous_duration_seconds": 598.0
+    },
+    {
+      "name": "Fresh source-only Compose installation",
+      "conclusion": "success",
+      "duration_seconds": 285.0,
+      "previous_duration_seconds": 263.0
+    }
+  ],
+  "source_artifact_sha256": {
+    "load-evidence/load/report.json": "7d0207e716d966d11ec8d1bae02e9a783ebfc95fb983a1861b9dbef4325c9ae4",
+    "load-evidence/load/environment.json": "6db685cd37184513f9880ef4f96380de4869ca28417ea6e6a86bf7f638dcc57c",
+    "load-evidence/load/cancellation-dispatch.json": "a1d6210962e18fea611afb7256684ff0d29b2b75bfcf3232e85cefbc9879d5f9",
+    "model-evaluation-evidence/comparison.json": "5f2b676bf0fbc43ce454b63076f6aca5253ac7665f5ccd36fbb1ce2a879e073e",
+    "model-evaluation-evidence/conversion.json": "c7fec0f08847466ec3ccf11368c5af583e6ba504ff4dacca6e0691dd1d7def3e",
+    "integration-evidence/summary.json": "357774acbf8ce8ac5fbbafd4988e077944e0a2b493d8b0b9a1361cb435b54040",
+    "clean-install-evidence/result.json": "cae8ab62adbbe8b0987e8c26f9e76d29176469ec05c3be495efa81b8a25d9c2b",
+    "clean-install-evidence/source-manifest.json": "e46c074dfb01a0627e40b54aacd1a76fe7746d8127a92f78327405a137684b85"
+  },
+  "environment": {
+    "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "logical_cpus": 8,
+    "host_memory": "MemTotal:        8130864 kB",
+    "versions": {
+      "go": "go version go1.27.0 linux/amd64",
+      "rust": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+      "node": "v24.12.0",
+      "docker": "29.1.3"
+    },
+    "profile": "smoke"
+  },
+  "model": {
+    "passed": true,
+    "failures": [],
+    "evaluated": 2000,
+    "rejected_ids": [],
+    "scores": {
+      "fp32": {
+        "PERSON": {
+          "precision": 0.7563091482649842,
+          "recall": 0.8647430117222723,
+          "f1": 0.806899453092133,
+          "gold": 1109,
+          "matched": 959,
+          "predicted": 1268
+        },
+        "ORGANIZATION": {
+          "precision": 0.5125,
+          "recall": 0.6680244399185336,
+          "f1": 0.5800176834659593,
+          "gold": 982,
+          "matched": 656,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6604651162790698,
+          "recall": 0.744429882044561,
+          "f1": 0.6999383857054837,
+          "gold": 1526,
+          "matched": 1136,
+          "predicted": 1720
+        },
+        "overall": {
+          "precision": 0.64456419868791,
+          "recall": 0.7605750622062483,
+          "f1": 0.6977805960684844,
+          "gold": 3617,
+          "predicted": 4268,
+          "matched": 2751
+        }
+      },
+      "existing": {
+        "PERSON": {
+          "precision": 0.7509819324430479,
+          "recall": 0.8620378719567178,
+          "f1": 0.8026868178001679,
+          "gold": 1109,
+          "matched": 956,
+          "predicted": 1273
+        },
+        "ORGANIZATION": {
+          "precision": 0.51015625,
+          "recall": 0.664969450101833,
+          "f1": 0.5773651635720601,
+          "gold": 982,
+          "matched": 653,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6558328496807894,
+          "recall": 0.7404980340760158,
+          "f1": 0.6955986457371499,
+          "gold": 1526,
+          "matched": 1130,
+          "predicted": 1723
+        },
+        "overall": {
+          "precision": 0.6405519176800748,
+          "recall": 0.757257395631739,
+          "f1": 0.694032687191182,
+          "gold": 3617,
+          "predicted": 4276,
+          "matched": 2739
+        }
+      },
+      "candidate": {
+        "PERSON": {
+          "precision": 0.7555031446540881,
+          "recall": 0.866546438232642,
+          "f1": 0.8072238555228896,
+          "gold": 1109,
+          "matched": 961,
+          "predicted": 1272
+        },
+        "ORGANIZATION": {
+          "precision": 0.50546875,
+          "recall": 0.6588594704684317,
+          "f1": 0.5720601237842617,
+          "gold": 982,
+          "matched": 647,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6510687463893703,
+          "recall": 0.7385321100917431,
+          "f1": 0.6920478968375806,
+          "gold": 1526,
+          "matched": 1127,
+          "predicted": 1731
+        },
+        "overall": {
+          "precision": 0.6385710950268504,
+          "recall": 0.7561515067735692,
+          "f1": 0.6924050632911394,
+          "gold": 3617,
+          "predicted": 4283,
+          "matched": 2735
+        }
+      },
+      "candidate-repeat": {
+        "PERSON": {
+          "precision": 0.7555031446540881,
+          "recall": 0.866546438232642,
+          "f1": 0.8072238555228896,
+          "gold": 1109,
+          "matched": 961,
+          "predicted": 1272
+        },
+        "ORGANIZATION": {
+          "precision": 0.50546875,
+          "recall": 0.6588594704684317,
+          "f1": 0.5720601237842617,
+          "gold": 982,
+          "matched": 647,
+          "predicted": 1280
+        },
+        "LOCATION": {
+          "precision": 0.6510687463893703,
+          "recall": 0.7385321100917431,
+          "f1": 0.6920478968375806,
+          "gold": 1526,
+          "matched": 1127,
+          "predicted": 1731
+        },
+        "overall": {
+          "precision": 0.6385710950268504,
+          "recall": 0.7561515067735692,
+          "f1": 0.6924050632911394,
+          "gold": 3617,
+          "predicted": 4283,
+          "matched": 2735
+        }
+      }
+    },
+    "artifacts": {
+      "fp32": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+      "existing": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+      "candidate": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+      "candidate-repeat": "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+    }
+  },
+  "conversion": {
+    "schema_version": 1,
+    "environment": {
+      "python": "3.14.7 (main, Aug  6 2026, 02:20:04) [GCC 11.4.0]",
+      "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+      "cpu": "x86_64",
+      "logical_cpus": 8,
+      "commit": "c5daba353a56740663264a2648745a78006c0b1f",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "packages": {
+        "onnx": "1.22.0",
+        "onnxruntime": "1.29.0",
+        "pyarrow": "25.0.1",
+        "numpy": "2.5.2"
+      }
+    },
+    "options": {
+      "weight_type": "QInt8",
+      "per_channel": false,
+      "reduce_range": false,
+      "operators": [
+        "MatMul",
+        "Gemm"
+      ],
+      "extra_options": {
+        "MatMulConstBOnly": true
+      }
+    },
+    "source_sha256": "9784f160524c01c12145872ed76c3361b0f90285b484678ad92b2c30be57b408",
+    "output_sha256": [
+      "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c",
+      "99392401feb12b98459e795f7aca75786d52c099e333b29d272fe71d362a7e2c"
+    ],
+    "reproducible": true
+  },
+  "integration": {
+    "schema_version": 1,
+    "exit_code": 0,
+    "required": [
+      "TestPinnedSDKCompatibility",
+      "TestPostgresBoundary",
+      "TestRealEngineHTTPBoundary",
+      "TestRedisAtomicLimit"
+    ],
+    "missing_or_failed": [],
+    "skipped": []
+  },
+  "clean_install": {
+    "schema_version": 1,
+    "passed": true,
+    "source_files": 144,
+    "source_mode": "tracked-source",
+    "preexisting_app_dependencies": false,
+    "ner": "passed"
+  },
+  "installation_memory": {
+    "engine": {
+      "container_id": "af097648159c52b95bd03dfa913b70502196ddb0bce30788fb2391b26c66c81b",
+      "cgroup_memory_current_bytes": 220266496,
+      "cgroup_memory_peak_bytes": 221143040,
+      "scope": "installation and functional smoke; not sustained load"
+    },
+    "gateway": {
+      "container_id": "d4b2ffcdf5164242ec6ca20f656f36456548e4e64a543dab81a8662638bd506a",
+      "cgroup_memory_current_bytes": 4018176,
+      "cgroup_memory_peak_bytes": 7852032,
+      "scope": "installation and functional smoke; not sustained load"
+    }
+  },
+  "load": {
+    "complete": true,
+    "profile": "smoke",
+    "planned_conditions": 13,
+    "completed_conditions": 13,
+    "conditions": [
+      {
+        "transport": "grpc",
+        "scenario": "clean-64",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "allowed",
+            "name": "clean-64",
+            "tokens": 0
+          }
+        ],
+        "actual_mix": {
+          "clean-64": 1594
+        },
+        "warmup_seconds": 1.000387546,
+        "duration_seconds": 3.003925134,
+        "requests": 1594,
+        "successful_requests": 1594,
+        "outcomes": {
+          "ok": 1594
+        },
+        "attempted_rps": 530.6390568653899,
+        "successful_rps": 530.6390568653899,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 1594,
+          "p50_ms": 5.308140280749208,
+          "p95_ms": 22.247566049121968,
+          "p99_ms": 30.5894584999237,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 1594,
+          "p50_ms": 5.308140280749208,
+          "p95_ms": 22.247566049121968,
+          "p99_ms": 30.5894584999237,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 2.752327,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "000-grpc-clean-64-c4-cancel0",
+        "resource_samples": 9,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 242577408,
+            "last_rss_bytes": 244170752,
+            "sampled_peak_rss_bytes": 244170752,
+            "process_lifetime_peak_rss_bytes": 244170752
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "masked-1024",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 1024,
+            "contextual": false,
+            "expected": "masked",
+            "name": "masked-1024",
+            "tokens": 0
+          }
+        ],
+        "actual_mix": {
+          "masked-1024": 1635
+        },
+        "warmup_seconds": 1.012416002,
+        "duration_seconds": 3.011892305,
+        "requests": 1635,
+        "successful_requests": 1635,
+        "outcomes": {
+          "ok": 1635
+        },
+        "attempted_rps": 542.8480949620142,
+        "successful_rps": 542.8480949620142,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 1635,
+          "p50_ms": 5.255574535395261,
+          "p95_ms": 19.547982874805832,
+          "p99_ms": 27.146478696263095,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 1635,
+          "p50_ms": 5.255574535395261,
+          "p95_ms": 19.547982874805832,
+          "p99_ms": 27.146478696263095,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 1.900007,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "001-grpc-masked-1024-c4-cancel0",
+        "resource_samples": 9,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 244178944,
+            "last_rss_bytes": 244367360,
+            "sampled_peak_rss_bytes": 244367360,
+            "process_lifetime_peak_rss_bytes": 244367360
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "blocked-16384",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 16384,
+            "contextual": false,
+            "expected": "blocked",
+            "name": "blocked-16384",
+            "tokens": 0
+          }
+        ],
+        "actual_mix": {
+          "blocked-16384": 1480
+        },
+        "warmup_seconds": 1.00069015,
+        "duration_seconds": 3.008153343,
+        "requests": 1480,
+        "successful_requests": 1480,
+        "outcomes": {
+          "expected_block": 1480
+        },
+        "attempted_rps": 491.9961954213449,
+        "successful_rps": 491.9961954213449,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 1480,
+          "p50_ms": 5.922239759237706,
+          "p95_ms": 23.382466517940834,
+          "p99_ms": 32.14987932058678,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 1480,
+          "p50_ms": 5.922239759237706,
+          "p95_ms": 23.382466517940834,
+          "p99_ms": 32.14987932058678,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 23.093867,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "002-grpc-blocked-16384-c4-cancel0",
+        "resource_samples": 9,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 244367360,
+            "last_rss_bytes": 244977664,
+            "sampled_peak_rss_bytes": 244977664,
+            "process_lifetime_peak_rss_bytes": 244977664
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "ner-32",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 150,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-32",
+            "tokens": 32
+          }
+        ],
+        "actual_mix": {
+          "ner-32": 119
+        },
+        "warmup_seconds": 1.010263052,
+        "duration_seconds": 3.078512038,
+        "requests": 119,
+        "successful_requests": 119,
+        "outcomes": {
+          "ok": 119
+        },
+        "attempted_rps": 38.655038060955604,
+        "successful_rps": 38.655038060955604,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 119,
+          "p50_ms": 93.23418782070856,
+          "p95_ms": 171.0728584829231,
+          "p99_ms": 200.59655316177458,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 119,
+          "p50_ms": 93.23418782070856,
+          "p95_ms": 171.0728584829231,
+          "p99_ms": 200.59655316177458,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 5.956676,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "003-grpc-ner-32-c4-cancel0",
+        "resource_samples": 9,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 244977664,
+            "last_rss_bytes": 247418880,
+            "sampled_peak_rss_bytes": 247418880,
+            "process_lifetime_peak_rss_bytes": 247418880
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "ner-512",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 2550,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-512",
+            "tokens": 512
+          }
+        ],
+        "actual_mix": {
+          "ner-512": 14
+        },
+        "warmup_seconds": 1.263558962,
+        "duration_seconds": 4.148920285,
+        "requests": 14,
+        "successful_requests": 14,
+        "outcomes": {
+          "ok": 14
+        },
+        "attempted_rps": 3.374371893963733,
+        "successful_rps": 3.374371893963733,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 14,
+          "p50_ms": 1155.8115799447794,
+          "p95_ms": 1264.0941966689218,
+          "p99_ms": 1264.0941966689218,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 14,
+          "p50_ms": 1155.8115799447794,
+          "p95_ms": 1264.0941966689218,
+          "p99_ms": 1264.0941966689218,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 8.000542,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "004-grpc-ner-512-c4-cancel0",
+        "resource_samples": 11,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 247418880,
+            "last_rss_bytes": 302436352,
+            "sampled_peak_rss_bytes": 302436352,
+            "process_lifetime_peak_rss_bytes": 302436352
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "mixed",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "blocked",
+            "name": "blocked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "allowed",
+            "name": "clean-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "masked",
+            "name": "masked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 150,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-32",
+            "tokens": 32
+          }
+        ],
+        "actual_mix": {
+          "blocked-64": 67,
+          "clean-64": 272,
+          "masked-64": 202,
+          "ner-32": 134
+        },
+        "warmup_seconds": 1.001621067,
+        "duration_seconds": 3.063443548,
+        "requests": 675,
+        "successful_requests": 675,
+        "outcomes": {
+          "expected_block": 67,
+          "ok": 608
+        },
+        "attempted_rps": 220.34027701952613,
+        "successful_rps": 220.34027701952613,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 675,
+          "p50_ms": 0.9868978297787832,
+          "p95_ms": 108.24215860793377,
+          "p99_ms": 140.20163473894473,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 675,
+          "p50_ms": 0.9868978297787832,
+          "p95_ms": 108.24215860793377,
+          "p99_ms": 140.20163473894473,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 6.510356,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "005-grpc-mixed-c4-cancel0",
+        "resource_samples": 7,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 302436352,
+            "last_rss_bytes": 302440448,
+            "sampled_peak_rss_bytes": 302440448,
+            "process_lifetime_peak_rss_bytes": 302440448
+          }
+        }
+      },
+      {
+        "transport": "http",
+        "scenario": "mixed",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "blocked",
+            "name": "blocked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "allowed",
+            "name": "clean-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "masked",
+            "name": "masked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 150,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-32",
+            "tokens": 32
+          }
+        ],
+        "actual_mix": {
+          "blocked-64": 10,
+          "clean-64": 44,
+          "masked-64": 32,
+          "ner-32": 20
+        },
+        "warmup_seconds": 1.3988731730000001,
+        "duration_seconds": 3.109225615,
+        "requests": 106,
+        "successful_requests": 106,
+        "outcomes": {
+          "expected_block": 10,
+          "ok": 96
+        },
+        "attempted_rps": 34.09209016181349,
+        "successful_rps": 34.09209016181349,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 106,
+          "p50_ms": 85.24764524496204,
+          "p95_ms": 326.641692389975,
+          "p99_ms": 379.22102536323285,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 106,
+          "p50_ms": 85.24764524496204,
+          "p95_ms": 326.641692389975,
+          "p99_ms": 379.22102536323285,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 10,
+        "recovered": true,
+        "recovery_ms": 12.178924,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 1000,
+        "name": "006-http-mixed-c4-cancel0",
+        "resource_samples": 10,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 302440448,
+            "last_rss_bytes": 302440448,
+            "sampled_peak_rss_bytes": 302440448,
+            "process_lifetime_peak_rss_bytes": 302440448
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22986752,
+            "last_rss_bytes": 27709440,
+            "sampled_peak_rss_bytes": 27709440,
+            "process_lifetime_peak_rss_bytes": 27709440
+          }
+        },
+        "gateway_fixture": {
+          "go_allocated_bytes": 6850648,
+          "go_allocations": 65108,
+          "go_gc_cycles": 10,
+          "after": {
+            "active_upstream": 0,
+            "canceled_upstream": 0,
+            "dispatched_upstream": 114,
+            "pid": 11077,
+            "privacy_failures": 0,
+            "scope": "fixture process includes production gateway handlers and synthetic upstream"
+          }
+        }
+      },
+      {
+        "transport": "sse",
+        "scenario": "mixed",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "blocked",
+            "name": "blocked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "allowed",
+            "name": "clean-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "masked",
+            "name": "masked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 150,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-32",
+            "tokens": 32
+          }
+        ],
+        "actual_mix": {
+          "blocked-64": 8,
+          "clean-64": 35,
+          "masked-64": 24,
+          "ner-32": 16
+        },
+        "warmup_seconds": 2.935854328,
+        "duration_seconds": 3.235337975,
+        "requests": 83,
+        "successful_requests": 83,
+        "outcomes": {
+          "expected_block": 8,
+          "ok": 75
+        },
+        "attempted_rps": 25.654197688573788,
+        "successful_rps": 25.654197688573788,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 83,
+          "p50_ms": 106.10934075868407,
+          "p95_ms": 406.5763396895429,
+          "p99_ms": 467.3491676598832,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 83,
+          "p50_ms": 106.10934075868407,
+          "p95_ms": 406.5763396895429,
+          "p99_ms": 467.3491676598832,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 10,
+        "recovered": true,
+        "recovery_ms": 17.831599,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 1000,
+        "name": "007-sse-mixed-c4-cancel0",
+        "resource_samples": 13,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 302440448,
+            "last_rss_bytes": 302440448,
+            "sampled_peak_rss_bytes": 302440448,
+            "process_lifetime_peak_rss_bytes": 302440448
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22675456,
+            "last_rss_bytes": 27176960,
+            "sampled_peak_rss_bytes": 27176960,
+            "process_lifetime_peak_rss_bytes": 27176960
+          }
+        },
+        "gateway_fixture": {
+          "go_allocated_bytes": 6150816,
+          "go_allocations": 55786,
+          "go_gc_cycles": 9,
+          "after": {
+            "active_upstream": 0,
+            "canceled_upstream": 0,
+            "dispatched_upstream": 93,
+            "pid": 11192,
+            "privacy_failures": 0,
+            "scope": "fixture process includes production gateway handlers and synthetic upstream"
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "ner-128",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 630,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-128",
+            "tokens": 128
+          }
+        ],
+        "actual_mix": {
+          "ner-128": 28
+        },
+        "warmup_seconds": 2.684938366,
+        "duration_seconds": 3.326661192,
+        "requests": 28,
+        "successful_requests": 25,
+        "outcomes": {
+          "canceled": 3,
+          "ok": 25
+        },
+        "attempted_rps": 8.416847518868101,
+        "successful_rps": 7.515042427560805,
+        "error_rate": 0,
+        "unsuccessful_rate": 0.10714285714285714,
+        "all_latency": {
+          "count": 28,
+          "p50_ms": 481.5103450901454,
+          "p95_ms": 784.0671987268354,
+          "p99_ms": 815.9035117086225,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 25,
+          "p50_ms": 486.3254585410464,
+          "p95_ms": 784.0671987268354,
+          "p99_ms": 815.9035117086225,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 3,
+          "p50_ms": 1.575945191341848,
+          "p95_ms": 2.516219960947815,
+          "p99_ms": 2.516219960947815,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 3,
+        "cancellation_signaled": 3,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 8.968216,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "008-grpc-ner-128-c4-cancel10",
+        "resource_samples": 13,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 302440448,
+            "last_rss_bytes": 304533504,
+            "sampled_peak_rss_bytes": 304533504,
+            "process_lifetime_peak_rss_bytes": 304533504
+          }
+        }
+      },
+      {
+        "transport": "http",
+        "scenario": "mixed",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "blocked",
+            "name": "blocked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "allowed",
+            "name": "clean-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "masked",
+            "name": "masked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 150,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-32",
+            "tokens": 32
+          }
+        ],
+        "actual_mix": {
+          "blocked-64": 8,
+          "clean-64": 36,
+          "masked-64": 26,
+          "ner-32": 16
+        },
+        "warmup_seconds": 2.6383280669999998,
+        "duration_seconds": 3.117483281,
+        "requests": 86,
+        "successful_requests": 77,
+        "outcomes": {
+          "canceled": 9,
+          "expected_block": 7,
+          "ok": 70
+        },
+        "attempted_rps": 27.58635484082328,
+        "successful_rps": 24.699410729574332,
+        "error_rate": 0,
+        "unsuccessful_rate": 0.10465116279069768,
+        "all_latency": {
+          "count": 86,
+          "p50_ms": 89.59618290986467,
+          "p95_ms": 453.6044683630153,
+          "p99_ms": 575.957579944068,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 77,
+          "p50_ms": 97.99011942252581,
+          "p95_ms": 496.10062035772205,
+          "p99_ms": 575.957579944068,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 9,
+          "p50_ms": 15.549077905161292,
+          "p95_ms": 36.955606711929185,
+          "p99_ms": 36.955606711929185,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 9,
+        "cancellation_signaled": 9,
+        "cancel_after_ms": 10,
+        "recovered": true,
+        "recovery_ms": 6.911502,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 1000,
+        "name": "009-http-mixed-c4-cancel10",
+        "resource_samples": 12,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 304533504,
+            "last_rss_bytes": 304537600,
+            "sampled_peak_rss_bytes": 304537600,
+            "process_lifetime_peak_rss_bytes": 304537600
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 22966272,
+            "last_rss_bytes": 27668480,
+            "sampled_peak_rss_bytes": 27668480,
+            "process_lifetime_peak_rss_bytes": 27668480
+          }
+        },
+        "gateway_fixture": {
+          "go_allocated_bytes": 5861992,
+          "go_allocations": 54227,
+          "go_gc_cycles": 8,
+          "after": {
+            "active_upstream": 0,
+            "canceled_upstream": 0,
+            "dispatched_upstream": 88,
+            "pid": 11424,
+            "privacy_failures": 0,
+            "scope": "fixture process includes production gateway handlers and synthetic upstream"
+          }
+        }
+      },
+      {
+        "transport": "sse",
+        "scenario": "mixed",
+        "concurrency": 4,
+        "inputs": [
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "blocked",
+            "name": "blocked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "allowed",
+            "name": "clean-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 64,
+            "contextual": false,
+            "expected": "masked",
+            "name": "masked-64",
+            "tokens": 0
+          },
+          {
+            "bytes": 150,
+            "contextual": true,
+            "expected": "masked",
+            "name": "ner-32",
+            "tokens": 32
+          }
+        ],
+        "actual_mix": {
+          "blocked-64": 9,
+          "clean-64": 40,
+          "masked-64": 29,
+          "ner-32": 18
+        },
+        "warmup_seconds": 2.605236573,
+        "duration_seconds": 3.048370219,
+        "requests": 96,
+        "successful_requests": 87,
+        "outcomes": {
+          "canceled": 9,
+          "expected_block": 8,
+          "ok": 79
+        },
+        "attempted_rps": 31.492237852754062,
+        "successful_rps": 28.53984055405837,
+        "error_rate": 0,
+        "unsuccessful_rate": 0.09375,
+        "all_latency": {
+          "count": 96,
+          "p50_ms": 81.1101608655416,
+          "p95_ms": 383.01324561686476,
+          "p99_ms": 511.1329955561807,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 87,
+          "p50_ms": 94.1665396989157,
+          "p95_ms": 383.01324561686476,
+          "p99_ms": 511.1329955561807,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 9,
+          "p50_ms": 13.393051437151065,
+          "p95_ms": 124.42171957920971,
+          "p99_ms": 124.42171957920971,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 9,
+        "cancellation_signaled": 9,
+        "cancel_after_ms": 10,
+        "recovered": true,
+        "recovery_ms": 25.042494,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 1000,
+        "name": "010-sse-mixed-c4-cancel10",
+        "resource_samples": 12,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 304541696,
+            "last_rss_bytes": 304541696,
+            "sampled_peak_rss_bytes": 304541696,
+            "process_lifetime_peak_rss_bytes": 304541696
+          },
+          "gateway_fixture": {
+            "first_rss_bytes": 23093248,
+            "last_rss_bytes": 27357184,
+            "sampled_peak_rss_bytes": 27357184,
+            "process_lifetime_peak_rss_bytes": 27357184
+          }
+        },
+        "gateway_fixture": {
+          "go_allocated_bytes": 6898704,
+          "go_allocations": 61402,
+          "go_gc_cycles": 10,
+          "after": {
+            "active_upstream": 0,
+            "canceled_upstream": 0,
+            "dispatched_upstream": 98,
+            "pid": 11566,
+            "privacy_failures": 0,
+            "scope": "fixture process includes production gateway handlers and synthetic upstream"
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "rules-over-limit",
+        "concurrency": 1,
+        "inputs": [
+          {
+            "bytes": 131073,
+            "contextual": false,
+            "expected": "invalid",
+            "name": "rules-over-limit",
+            "tokens": 0
+          }
+        ],
+        "actual_mix": {
+          "rules-over-limit": 98
+        },
+        "warmup_seconds": 0.269054429,
+        "duration_seconds": 1.008819018,
+        "requests": 98,
+        "successful_requests": 98,
+        "outcomes": {
+          "expected_rejection": 98
+        },
+        "attempted_rps": 97.14329156312554,
+        "successful_rps": 97.14329156312554,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 98,
+          "p50_ms": 9.837964082417768,
+          "p95_ms": 26.34807536366857,
+          "p99_ms": 42.05906576646248,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 98,
+          "p50_ms": 9.837964082417768,
+          "p95_ms": 26.34807536366857,
+          "p99_ms": 42.05906576646248,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 9.663295,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "011-grpc-rules-over-limit-c1-cancel0",
+        "resource_samples": 3,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 304541696,
+            "last_rss_bytes": 305614848,
+            "sampled_peak_rss_bytes": 305614848,
+            "process_lifetime_peak_rss_bytes": 305614848
+          }
+        }
+      },
+      {
+        "transport": "grpc",
+        "scenario": "ner-513",
+        "concurrency": 1,
+        "inputs": [
+          {
+            "bytes": 2555,
+            "contextual": true,
+            "expected": "invalid",
+            "name": "ner-513",
+            "tokens": 513
+          }
+        ],
+        "actual_mix": {
+          "ner-513": 280
+        },
+        "warmup_seconds": 0.149206147,
+        "duration_seconds": 1.006643849,
+        "requests": 280,
+        "successful_requests": 280,
+        "outcomes": {
+          "expected_rejection": 280
+        },
+        "attempted_rps": 278.1520001122065,
+        "successful_rps": 278.1520001122065,
+        "error_rate": 0,
+        "unsuccessful_rate": 0,
+        "all_latency": {
+          "count": 280,
+          "p50_ms": 2.671079712041167,
+          "p95_ms": 9.644097620250731,
+          "p99_ms": 16.67078825014156,
+          "relative_bucket_width": 0.01
+        },
+        "successful_latency": {
+          "count": 280,
+          "p50_ms": 2.671079712041167,
+          "p95_ms": 9.644097620250731,
+          "p99_ms": 16.67078825014156,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_latency": {
+          "count": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "p99_ms": null,
+          "relative_bucket_width": 0.01
+        },
+        "cancellation_selected": 0,
+        "cancellation_signaled": 0,
+        "cancel_after_ms": 1,
+        "recovered": true,
+        "recovery_ms": 16.190233,
+        "measurement_clock": "Go monotonic clock",
+        "clock_frequency_hz": 1000000000,
+        "deadline_ms": 10000,
+        "name": "012-grpc-ner-513-c1-cancel0",
+        "resource_samples": 3,
+        "memory": {
+          "engine": {
+            "first_rss_bytes": 305618944,
+            "last_rss_bytes": 306110464,
+            "sampled_peak_rss_bytes": 306110464,
+            "process_lifetime_peak_rss_bytes": 306110464
+          }
+        }
+      }
+    ]
+  },
+  "cancellation_dispatch": {
+    "iterations": 20,
+    "max_drain_ms": 41.483713,
+    "all_recovered": true,
+    "scope": "real public Rust service dispatch; HTTP/gRPC transport cancellation measured separately",
+    "note": "Dispatch abort terminates request-specific RunOptions; capacity remains occupied until native work exits."
+  },
+  "limitations": [
+    "Smoke profile, not full sustained-load acceptance.",
+    "P99 below 6 ms remains unmet.",
+    "No smaller-model evaluation or manual reference matrix rerun.",
+    "Workflow elapsed time includes builds, tools and scheduling; it is not request latency."
+  ]
+}

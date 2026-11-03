@@ -1,0 +1,58 @@
+[package]
+name = "prompt-shield-engine"
+default-run = "prompt-shield-engine"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+license = "AGPL-3.0-only"
+
+[features]
+default = []
+ner = ["dep:ort", "dep:tokenizers"]
+evaluation = ["ner", "dep:serde", "dep:serde_json"]
+profiling = []
+
+[dependencies]
+aho-corasick = "1.1"
+anyhow = "1"
+prost = "0.14"
+regex = "1.11"
+thiserror = "2"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+tonic = "0.14"
+tonic-prost = "0.14"
+tonic-health = "0.14"
+uuid = { version = "1", features = ["v4"] }
+ort = { version = "=2.0.0-rc.10", optional = true }
+tokenizers = { version = "0.22", optional = true, default-features = false, features = ["onig"] }
+sha2 = "0.10"
+hmac = "0.12"
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", optional = true }
+
+[[bin]]
+name = "ner-evaluate"
+path = "src/bin/ner_evaluate.rs"
+required-features = ["evaluation"]
+
+[[bin]]
+name = "allocation-profile"
+path = "src/bin/allocation_profile.rs"
+required-features = ["evaluation"]
+
+[[bin]]
+name = "cancellation-profile"
+path = "src/bin/cancellation_profile.rs"
+required-features = ["evaluation"]
+
+[build-dependencies]
+tonic-prost-build = "0.14"
+prost-build = "0.14"
+protoc-bin-vendored = "3"
+
+[dev-dependencies]
+criterion = "0.7"
+
+[[bench]]
+name = "sanitization"
+harness = false

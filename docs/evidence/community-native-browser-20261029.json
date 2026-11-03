@@ -1,0 +1,93 @@
+{
+  "run_id": "community-native-browser-20261029",
+  "date": "2026-10-29",
+  "timezone": "Europe/Istanbul",
+  "community_base_revision": "b0cffaa72f3984fd70b66685d261290a38a18a11",
+  "revision_boundary": "Current uncommitted shared-frontend working tree; browser acceptance/documentation only in this run",
+  "scope": "User-delegated completion of CE-05 and CE-07 in the actual installed Chrome and Edge; earlier seven accepted scenarios preserved",
+  "os": "Windows 11 Education 10.0.26300",
+  "browsers": {
+    "chrome": {
+      "version": "156.0.8078.49",
+      "driver": "Connected installed browser, interactive CUA controls, actual visible page observations",
+      "CE-05": "PASS",
+      "CE-07": "PASS",
+      "remaining_protocols_completed": 2
+    },
+    "edge": {
+      "version": "156.0.4314.50",
+      "driver": "Explicitly user-authorized Playwright, installed msedge channel, headless=false, isolated contexts, no route mocks; resulting screenshots reviewed",
+      "viewport": "1440x960",
+      "CE-05": "PASS",
+      "CE-07": "PASS",
+      "grouped_checks_passed": 8,
+      "remaining_protocols_completed": 2
+    }
+  },
+  "real_services": ["Community gateways with ephemeral stores", "Rust rules engine", "Rust English INT8 NER engine"],
+  "origins": {
+    "chrome_hybrid": "http://127.0.0.1:18083",
+    "rules_only": "http://127.0.0.1:18084",
+    "edge_hybrid": "http://127.0.0.1:18085",
+    "synthetic_provider": "http://127.0.0.1:18090"
+  },
+  "model": {
+    "identity": "Xenova/bert-base-NER",
+    "revision": "24c7e5aba9ae350923357a6f0b92571be34037ec",
+    "model_sha256": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+    "tokenizer_sha256": "343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1"
+  },
+  "CE-05_observations": [
+    "Synthetic email restored in the assistant response and a follow-up completes",
+    "Fresh tab has no provider credential; reload retains the current tab key and clears conversation",
+    "Clear conversation and reload leave no prior response; Forget disables chat for a nonempty prompt",
+    "Known override phrase shows the security block and does not increase provider dispatch",
+    "Delayed request cancellation restores controls; subsequent clean request completes and the cancelled email response does not appear"
+  ],
+  "CE-07_observations": [
+    "Deterministic mask off leaves the synthetic email unchanged; mask on produces a placeholder",
+    "Inspection lab masks the synthetic valid card",
+    "Custom keyword addition blocks P13; removal allows it",
+    "Stale policy editor is rejected; reload confirms its keyword was not saved",
+    "Actual pinned NER displays Person, Organization and Location for P12",
+    "Contextual detection works independently with deterministic masking off; contextual off leaves P12 unchanged",
+    "Rules-only UI disables the unavailable contextual control"
+  ],
+  "fixture_privacy": {
+    "external_provider_calls": 0,
+    "exposed_synthetic_email": 0,
+    "active_requests_at_completion": 0,
+    "edge_cumulative_cancelled_requests": 3,
+    "counter_scope": "Final provider counters cover repeated Edge test-driver attempts, not a capacity measurement"
+  },
+  "test_driver_corrections": [
+    "First Edge policy assertion matched both the input textarea and result; scoped assertions to the rendered result",
+    "Fast repeated public policy probes reached the existing minute limit; used the authenticated inspection lab and a fresh isolated gateway without altering admission controls",
+    "Same-host operator cookies are shared across local ports; rules-only and hybrid Edge checks use separate contexts; Chrome reauthenticated before finishing its hybrid lab check"
+  ],
+  "local_artifacts": [
+    "output/chrome-ce05-20261029.png",
+    "output/chrome-ce07-ner-20261029.png",
+    "output/chrome-ce07-card-20261029.png",
+    "output/edge-ce05-20261029.png",
+    "output/edge-ce07-ner-20261029.png",
+    "output/edge-native-acceptance-20261029.json",
+    "apps/web-console/output/native-browser-acceptance.ts"
+  ],
+  "edge_runner_typechecked": true,
+  "edge_runner_sha256": "50232fcad89bee7525fcd2c0dfaf3f4b2d56c03962547fa36c4c3047bf2a4c7d",
+  "cleanup": {
+    "baseline_restored": { "mask_pii": true, "contextual_pii": false, "blocked_keywords": [] },
+    "test_conversations_and_active_provider_sessions_cleared": true,
+    "hybrid_operator_signed_out": true,
+    "isolated_edge_contexts_closed": true,
+    "agent_created_chrome_tabs_closed": true,
+    "owned_native_processes_stopped": true,
+    "test_ports_closed": [15063, 15064, 18083, 18084, 18085, 18090],
+    "docker_services_changed": false
+  },
+  "manual_matrix": "Chrome and Edge local browser cells: PASS across recorded runs (earlier seven scenarios plus CE-05/CE-07); not a fresh all-nine regression",
+  "unchanged_boundaries": ["Safari on Apple hardware", "hosted deployment", "live provider acceptance", "NER performance/quality workloads", "Enterprise acceptance"],
+  "production_source_changed": false,
+  "git_staging_commits_pushes": false
+}

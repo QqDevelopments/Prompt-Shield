@@ -1,0 +1,145 @@
+{
+  "run_id": "RUN-20261023-COMMUNITY-RECHECK-06",
+  "date": "2026-10-23",
+  "tester": "Codex, user-delegated independent recheck",
+  "source_acceptance_commit": "ce41a20f2444fb6cd1b2f6e0ac076969de3a34aa",
+  "tested_revision": "19c9b9090b9ecd5a06ec5b02fcf3e2cdf7e70036",
+  "rows_changed_to_pass_in_source_commit": ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C11", "C12"],
+  "additional_previously_user_accepted_ui_rows_rechecked": ["C15", "C20"],
+  "environment": {
+    "os": "Windows",
+    "browser": "Codex in-app browser; Chrome/Edge/Safari not connected",
+    "browser_version": "not captured",
+    "viewports": ["1280x900", "390x844"],
+    "origin": "http://127.0.0.1:18085",
+    "backend": "Isolated actual gateway and rules-only engine processes; ephemeral store",
+    "frontend": "Fresh production build from tested revision",
+    "provider": "Disposable loopback HTTP model-discovery fixture behind a loopback proxy",
+    "test_data": "Synthetic example IDs only; no vendor account contacted",
+    "fixture_public_requests_per_minute": 1000,
+    "fixture_configuration_note": "Increased only the disposable development gateway's minute allowance after observing its normal rate-limit error. Primary service configuration was unchanged."
+  },
+  "observations": [
+    {
+      "rows": ["C01", "C02"],
+      "exercised_steps": "PASS",
+      "complete_independent_scenario": false,
+      "checks": [
+        "Tab traversal reached language, appearance, Administrator, prompt, examples, provider, provider-key and session controls with visible solid focus outlines",
+        "English/Turkish labels and document language changed correctly",
+        "Light/dark palettes and System selection worked; Turkish and dark preference survived reload",
+        "390px public layout and long masked output wrapped without horizontal overflow; document/body widths were 375px at a 390px viewport",
+        "Rate-limit rejection displayed an understandable visible error"
+      ],
+      "unrepeated_environment_branches": ["Confirmed 200% browser zoom", "Windows theme change while System is selected", "Browser profile with site storage disabled"]
+    },
+    {
+      "rows": ["C03", "C04"],
+      "exercised_steps": "PASS",
+      "checks": [
+        "P01 unchanged, zero detections",
+        "P02/P03/P04/P05 masked email/card/IBAN/national ID with one detection each and visible timing/category labels",
+        "P06 invalid card checksum unchanged, zero detections",
+        "P09 masked both repeated email occurrences and card, reported three detections, preserved emoji and punctuation",
+        "Clear conversation removed the inspection result and prompt",
+        "Operator Inspection lab also masked P02"
+      ]
+    },
+    {
+      "rows": ["C05", "C06"],
+      "exercised_steps": "PASS for UI blocking",
+      "checks": ["P07 blocked as API credential", "P08 blocked as private key", "P10 blocked as known instruction override"],
+      "boundary": "This recheck exercised inspection UI only. Chat/audit/inspection fail-closed dispatch evidence remains in the preceding technical run; zero chat calls here alone does not prove that boundary."
+    },
+    {
+      "rows": ["C07"],
+      "exercised_steps": "PASS",
+      "checks": [
+        "OpenAI and Anthropic model discovery and fixture selection worked",
+        "Refresh models reloaded the list; selection was reset and could be selected again",
+        "401 displayed key rejection and removed the session credential",
+        "403 displayed model-listing permission denial separately",
+        "Empty list displayed its own empty-state message"
+      ]
+    },
+    {
+      "rows": ["C08"],
+      "exercised_steps": "PASS",
+      "complete_independent_scenario": false,
+      "checks": [
+        "Credential survived same-tab reload without being displayed",
+        "Provider switch removed the old credential and model list",
+        "Forget key removed the session credential",
+        "Loading state was observed before forgetting a delayed discovery credential; models remained absent after its six-second response window"
+      ],
+      "unrepeated_environment_branches": ["Actual browser storage-disabled profile and reload"],
+      "boundary": "Late UI result suppression was observed. Upstream socket cancellation was not established by this discovery fixture."
+    },
+    {
+      "rows": ["C11", "C12"],
+      "exercised_steps": "PASS for UI session and overview",
+      "checks": [
+        "Incorrect password displayed a clear error; correct synthetic password opened the workspace",
+        "Overview, Inspection lab, Security policy, API keys, Activity, Integration and Preferences opened",
+        "Direct protected-page reload retained the valid session",
+        "Sign out followed by direct Activity navigation and reload required login",
+        "With 113 recorded events, Overview explicitly counted the latest 100: 93 allowed, 3 masked, 3 blocked and 1 failed",
+        "Overview reported connected rules-only engine after the actual dependency fault recovered"
+      ],
+      "boundary": "This recheck does not newly establish Origin/CSRF or hosted cookie acceptance."
+    },
+    {
+      "rows": ["C15"],
+      "exercised_steps": "PASS for UI lifecycle",
+      "checks": [
+        "Created a disposable application key and observed its one-time secret without retaining it in evidence",
+        "Dismissal and reload left metadata only; the complete secret was absent",
+        "Integration displayed the loopback API base and application-key examples, with server provider configuration described separately",
+        "Confirmation dialog revoked the test key; the row changed from Active to Revoked"
+      ],
+      "boundary": "The UI-created secret was not used for an API request in this recheck. Existing authenticated-key/revocation contract evidence remains separate."
+    },
+    {
+      "rows": ["C20"],
+      "exercised_steps": "PASS for UI and HTTP metadata",
+      "generated_events": {"allowed": 105, "masked": 3, "blocked": 3, "failed": 1},
+      "generation_boundary": "Actual authenticated inspection requests; stopping the isolated engine generated the failed event through HTTP 503, then readiness recovered",
+      "ui_pagination_checkpoint": {"total_events": 113, "page_sizes": [50, 50, 13]},
+      "ui_filters": {"masked": 4, "blocked": 3, "failed": 1, "allowed_first_page": 50},
+      "checks": [
+        "Previous/Next states matched first/intermediate/final pages",
+        "Changing the filter from the final page reset to the first page and removed previous results",
+        "Refresh worked and each decision filter displayed only its own decision",
+        "Tables displayed decision/reason/count/timing/date metadata without tested raw prompts, credentials or placeholder mappings"
+      ],
+      "final_http_metadata_checkpoint": {"total_events": 115, "page_sizes": [50, 50, 15], "tested_raw_values_absent": true},
+      "checkpoint_note": "Two additional public P09 inspections for long-output/viewport checks occurred after the 113-event UI pagination observation.",
+      "boundary": "No new PostgreSQL, ingress or APM privacy acceptance follows from the ephemeral UI fixture."
+    }
+  ],
+  "automated_corroboration": {
+    "fresh_production_build": "PASS: npm run build",
+    "targeted_tests": "PASS: npm exec -- vitest run src/features/preferences/Preferences.test.tsx src/features/public/providerSession.test.ts",
+    "test_files_passed": 2,
+    "tests_passed": 6,
+    "boundary": "Component/session tests exercise production behavior with controlled storage/media inputs; they do not replace an actual browser storage-disabled profile or Windows theme change."
+  },
+  "outcome": {
+    "new_product_failures_observed": 0,
+    "product_source_changed": false,
+    "user_manual_acceptance_preserved": true,
+    "browser_compatibility_cells_changed": false,
+    "hosted_cells_changed": false,
+    "c27_performance_failure_unchanged": true
+  },
+  "cleanup": {
+    "both_test_application_keys_revoked": true,
+    "baseline_policy_verified": true,
+    "conversation_cleared": true,
+    "provider_credential_absent": true,
+    "operator_signed_out": true,
+    "temporary_tabs_closed_and_viewport_reset": true,
+    "temporary_provider_containers_network_removed": true,
+    "original_four_community_containers_preserved": true
+  }
+}

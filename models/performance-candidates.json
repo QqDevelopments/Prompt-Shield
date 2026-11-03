@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "candidates": [
+    {
+      "name": "dslim-distilbert",
+      "repository": "dslim/distilbert-NER",
+      "revision": "dfa2838a127384aabb82ed7719e16dab84c42a2a",
+      "inputs": ["input_ids", "attention_mask"],
+      "files": [
+        {"path": "onnx/model.onnx", "name": "fp32.onnx", "sha256": "4440f9fc64cd28ac75d83a38d89716f25947799640cd0e5f1f9f6e57b9c14160"},
+        {"path": "onnx/tokenizer.json", "name": "tokenizer.json", "sha256": "cb26b43c98e8266ae3e99c2a583cf8315d73b33a17e6b20b4df7ff1f22392d34"},
+        {"path": "onnx/config.json", "name": "config.json", "sha256": "8f9f01d47f61087197f9fa85185d4a7a6248333c15af1b221aa5e8b9b76462b5"}
+      ]
+    },
+    {
+      "name": "community-distilbert",
+      "repository": "onnx-community/distilbert-base-cased-finetuned-conll03-english-ONNX",
+      "revision": "fb91f17c2e6340945bc6b4a89c397ff43b330d95",
+      "inputs": ["input_ids", "attention_mask"],
+      "files": [
+        {"path": "onnx/model.onnx", "name": "fp32.onnx", "sha256": "9eb88f20ca4f762f565f5365ec6aa1fe3af6d886d5bdad9955bccfc3575eac94"},
+        {"path": "tokenizer.json", "name": "tokenizer.json", "sha256": "343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1"},
+        {"path": "config.json", "name": "config.json", "sha256": "07ac30a80112f6afadeb8b01d225a8f4adc5eb8dc00d6fd61526dbf17ec61d70"}
+      ]
+    }
+  ]
+}
